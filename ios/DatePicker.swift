@@ -13,7 +13,7 @@ import UIKit
     public var selectedDate: Date = .init()
     public var minimumDate: Date?
     public var maximumDate: Date?
-    public var datePickerMode: UIDatePicker.Mode = .date
+
     public var onChange: (([String: Any]) -> Void)?
     public var onStateChange: (([String: Any]) -> Void)?
 
@@ -31,9 +31,14 @@ import UIKit
         }
     }
 
+    public var datePickerMode: UIDatePicker.Mode = .date {
+        didSet {
+            dataManager = createDataManager()
+        }
+    }
+
     var isPickerScrolling = false {
         didSet {
-            print("[TEST] \(isPickerScrolling)")
             onStateChange?(["state": isPickerScrolling ? "spinnig" : "idle"])
         }
     }

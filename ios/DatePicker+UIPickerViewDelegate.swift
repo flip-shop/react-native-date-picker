@@ -79,10 +79,10 @@ extension DatePicker: UIPickerViewDelegate {
 
         guard var date = calendar.date(from: adjustDateComponents(newComponents)) else { return }
 
-        if let minimumDate, date < minimumDate {
+        if let minimumDate, date < minimumDate, datePickerMode == .date {
             date = minimumDate
         }
-        if let maximumDate, date > maximumDate {
+        if let maximumDate, date > maximumDate, datePickerMode == .date {
             date = maximumDate
         }
 
@@ -92,7 +92,7 @@ extension DatePicker: UIPickerViewDelegate {
     }
 
     private func adjustDateComponents(_ components: DateComponents) -> DateComponents {
-        guard datePickerMode == .date || datePickerMode == .dateAndTime else { return components }
+        guard datePickerMode == .date else { return components }
         var newComponents = components
         newComponents.day = 1
 
