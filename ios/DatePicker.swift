@@ -61,6 +61,7 @@ import UIKit
     }
 
     public func setup() {
+        nativeID = "ignoreScroll"
         overrideUserInterfaceStyle = .light
         calendar.locale = locale
         delegate = self
@@ -91,6 +92,8 @@ import UIKit
             switch collection.component {
             case .year:
                 row = collection.getRowForValue("\(components.year ?? 0)")
+            case .day where datePickerMode == .dateAndTime:
+                row = (calendar.ordinality(of: .day, in: .year, for: date) ?? 1) - 1
             case .month, .day:
                 row = collection.middleRow + (components.value(for: collection.component) ?? 0) - 1
             case .hour:
@@ -106,8 +109,7 @@ import UIKit
                         (Double(minutes) / Double(minuteInterval))
                             .rounded() * Double(minuteInterval)
                     )
-
-                    row = collection.getRowForValue("\(minutesValue)")
+                    row = collection.getRowForValue(String(format: "%02d", minutesValue))
                 }
             default: break
             }
