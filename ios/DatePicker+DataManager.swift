@@ -73,7 +73,7 @@ extension DatePicker {
     }
 
     private func generateAllDaysInYear() -> [String] {
-        let year = calendar.component(.year, from: selectedDate ?? Date())
+        let year = calendar.component(.year, from: selectedDate)
         let dateComponents = DateComponents(year: year, month: 1, day: 1)
         guard let startDate = calendar.date(from: dateComponents),
               let range = calendar.range(of: .day, in: .year, for: startDate)
