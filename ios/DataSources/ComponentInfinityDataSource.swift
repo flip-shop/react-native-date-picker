@@ -10,7 +10,6 @@ import Foundation
 let loopingMargin: Int = 1000
 
 public struct ComponentInfinityDataSource: DataSource {
-    let data: [String]
     let component: Calendar.Component
 
     var count: Int {

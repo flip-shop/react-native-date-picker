@@ -8,7 +8,6 @@
 import Foundation
 
 protocol DataSource {
-    var data: [String] { get }
     var component: Calendar.Component { get }
     var count: Int { get }
     var middleRow: Int { get }
