@@ -118,7 +118,7 @@ extension DatePicker: UIPickerViewDelegate {
         }
         if let newDay = newComponents.day, let oldDay = components.day, newDay != oldDay {
             let disct = oldDay - newDay
-            if let comp = dataManager.collections.firstIndex { $0.component == .day } {
+            if let comp = dataManager.collections.firstIndex(where: { $0.component == .day }) {
                 selectRow(selectedRow(inComponent: comp) - disct, inComponent: comp, animated: true)
             }
         }

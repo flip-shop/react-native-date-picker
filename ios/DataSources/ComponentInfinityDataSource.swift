@@ -11,6 +11,7 @@ let loopingMargin: Int = 1000
 
 public struct ComponentInfinityDataSource: DataSource {
     let component: Calendar.Component
+    private let data: [String]
 
     var count: Int {
         data.count * loopingMargin

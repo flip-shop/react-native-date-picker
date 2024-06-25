@@ -9,6 +9,7 @@ import Foundation
 
 public struct ComponentDataSource: DataSource {
     let component: Calendar.Component
+    private let data: [String]
 
     var count: Int {
         data.count
