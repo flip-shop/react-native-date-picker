@@ -1,5 +1,6 @@
 #import "RNDatePicker.h"
 #import "react_native_date_picker-Swift.h"
+#import <Foundation/Foundation.h>
 
 #ifdef RCT_NEW_ARCH_ENABLED
 #import "RCTConvert.h"
@@ -60,17 +61,16 @@ NSDate* unixMillisToNSDate (double unixMillis) {
         _props = defaultProps;
         
         _picker = [DatePicker new];
-        __weak typeof(self) weakSelf = self;
+        __weak RNDatePicker *weakSelf = self;
         _picker.onChange = ^(NSDictionary *event) {
             std::dynamic_pointer_cast<const RNDatePickerEventEmitter>(_eventEmitter)
-            ->onChange(RNDatePickerEventEmitter::OnChange{ .timestamp = _picker.date.timeIntervalSince1970 * 1000.0f });
+            ->onChange(RNDatePickerEventEmitter::OnChange{ .timestamp = _picker.selectedDate.timeIntervalSince1970 * 1000.0f });
         };
         _picker.onStateChange = ^(NSDictionary *event) {
-            if (weakSelf.onStateChange) {
-                weakSelf.onStateChange(event);
-            }
+            std::dynamic_pointer_cast<const RNDatePickerEventEmitter>(_eventEmitter)
+            ->onStateChange(RNDatePickerEventEmitter::OnStateChange { .state = _picker.isPickerScrolling ? @"spinnig" : @"idle" } );
         };
-        
+
         _reactMinuteInterval = 1;
         
         self.contentView = _picker;
@@ -90,7 +90,7 @@ NSDate* unixMillisToNSDate (double unixMillis) {
         [_picker.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
         [_picker.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
         
-        __weak typeof(self) weakSelf = self;
+        __weak RNDatePicker *weakSelf = self;
         _picker.onChange = ^(NSDictionary *event) {
             if (weakSelf.onChange) {
                 weakSelf.onChange(event);

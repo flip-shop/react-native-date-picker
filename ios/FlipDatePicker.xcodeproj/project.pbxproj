@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3927AA412C17258C00671DAD /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA372C17258C00671DAD /* DataSource.swift */; };
 		3927AA422C17258C00671DAD /* RNDatePicker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA392C17258C00671DAD /* RNDatePicker.mm */; };
 		3927AA432C17258C00671DAD /* DatePicker+UIPickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA3B2C17258C00671DAD /* DatePicker+UIPickerViewDelegate.swift */; };
 		3927AA442C17258C00671DAD /* DatePicker+UIPickerViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA3C2C17258C00671DAD /* DatePicker+UIPickerViewDataSource.swift */; };
@@ -15,11 +14,11 @@
 		3927AA462C17258C00671DAD /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA3E2C17258C00671DAD /* DatePicker.swift */; };
 		3927AA472C17258C00671DAD /* UIView+isScrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA402C17258C00671DAD /* UIView+isScrolling.swift */; };
 		3927AA4B2C17264600671DAD /* Array+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA4A2C17264600671DAD /* Array+subscript.swift */; };
-		3927AA4D2C17276A00671DAD /* InfinityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA4C2C17276A00671DAD /* InfinityDataSource.swift */; };
 		3927AA562C17329200671DAD /* ComponentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA552C17329200671DAD /* ComponentDataSource.swift */; };
 		3927AA582C1732ED00671DAD /* ComponentInfinityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA572C1732ED00671DAD /* ComponentInfinityDataSource.swift */; };
 		3927AA5A2C17335200671DAD /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA592C17335200671DAD /* DataManager.swift */; };
 		39975E572C17B81600B23594 /* DatePicker+DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39975E562C17B81600B23594 /* DatePicker+DataManager.swift */; };
+		39F5BD542C2AC3A100E12407 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5BD532C2AC3A100E12407 /* DataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,7 +36,6 @@
 /* Begin PBXFileReference section */
 		3927AA2C2C17255900671DAD /* libFlipDatePicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFlipDatePicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3927AA362C17258B00671DAD /* FlipDatePicker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlipDatePicker-Bridging-Header.h"; sourceTree = "<group>"; };
-		3927AA372C17258C00671DAD /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		3927AA392C17258C00671DAD /* RNDatePicker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RNDatePicker.mm; sourceTree = "<group>"; };
 		3927AA3A2C17258C00671DAD /* RNDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNDatePicker.h; sourceTree = "<group>"; };
 		3927AA3B2C17258C00671DAD /* DatePicker+UIPickerViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DatePicker+UIPickerViewDelegate.swift"; sourceTree = "<group>"; };
@@ -47,11 +45,11 @@
 		3927AA3F2C17258C00671DAD /* RNDatePickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNDatePickerManager.h; sourceTree = "<group>"; };
 		3927AA402C17258C00671DAD /* UIView+isScrolling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+isScrolling.swift"; sourceTree = "<group>"; };
 		3927AA4A2C17264600671DAD /* Array+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+subscript.swift"; sourceTree = "<group>"; };
-		3927AA4C2C17276A00671DAD /* InfinityDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinityDataSource.swift; sourceTree = "<group>"; };
 		3927AA552C17329200671DAD /* ComponentDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDataSource.swift; sourceTree = "<group>"; };
 		3927AA572C1732ED00671DAD /* ComponentInfinityDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentInfinityDataSource.swift; sourceTree = "<group>"; };
 		3927AA592C17335200671DAD /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		39975E562C17B81600B23594 /* DatePicker+DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatePicker+DataManager.swift"; sourceTree = "<group>"; };
+		39F5BD532C2AC3A100E12407 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +93,7 @@
 		3927AA482C1725E100671DAD /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
-				3927AA4E2C172A6200671DAD /* protocols */,
+				39F5BD532C2AC3A100E12407 /* DataSource.swift */,
 				3927AA552C17329200671DAD /* ComponentDataSource.swift */,
 				3927AA572C1732ED00671DAD /* ComponentInfinityDataSource.swift */,
 			);
@@ -109,15 +107,6 @@
 				3927AA402C17258C00671DAD /* UIView+isScrolling.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		3927AA4E2C172A6200671DAD /* protocols */ = {
-			isa = PBXGroup;
-			children = (
-				3927AA4C2C17276A00671DAD /* InfinityDataSource.swift */,
-				3927AA372C17258C00671DAD /* DataSource.swift */,
-			);
-			path = protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,14 +168,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3927AA4D2C17276A00671DAD /* InfinityDataSource.swift in Sources */,
 				3927AA5A2C17335200671DAD /* DataManager.swift in Sources */,
-				3927AA412C17258C00671DAD /* DataSource.swift in Sources */,
 				3927AA4B2C17264600671DAD /* Array+subscript.swift in Sources */,
 				3927AA562C17329200671DAD /* ComponentDataSource.swift in Sources */,
 				3927AA452C17258C00671DAD /* RNDatePickerManager.mm in Sources */,
 				39975E572C17B81600B23594 /* DatePicker+DataManager.swift in Sources */,
 				3927AA472C17258C00671DAD /* UIView+isScrolling.swift in Sources */,
+				39F5BD542C2AC3A100E12407 /* DataSource.swift in Sources */,
 				3927AA582C1732ED00671DAD /* ComponentInfinityDataSource.swift in Sources */,
 				3927AA422C17258C00671DAD /* RNDatePicker.mm in Sources */,
 				3927AA432C17258C00671DAD /* DatePicker+UIPickerViewDelegate.swift in Sources */,
