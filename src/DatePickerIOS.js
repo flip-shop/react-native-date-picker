@@ -18,8 +18,7 @@ export const DatePickerIOS = (props) => {
 
   const onSpinnerStateChanged = useCallback(
     /**
-     * @typedef {{ spinnerState: "spinning" | "idle" }} SpinnerStateData
-     * @param {{ nativeEvent: { state: SpinnerStateData } }} event
+     * @param {{ nativeEvent: { state: "spinning" | "idle" } }} event
      */
     (event) => {
       const spinnerState = event.nativeEvent.state

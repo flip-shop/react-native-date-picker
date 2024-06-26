@@ -68,7 +68,7 @@ NSDate* unixMillisToNSDate (double unixMillis) {
         };
         _picker.onStateChange = ^(NSDictionary *event) {
             std::dynamic_pointer_cast<const RNDatePickerEventEmitter>(_eventEmitter)
-            ->onStateChange(RNDatePickerEventEmitter::OnStateChange { .state = _picker.isPickerScrolling ? @"spinnig" : @"idle" } );
+            ->onStateChange(RNDatePickerEventEmitter::OnStateChange { .state = RCTStringFromNSString(_picker.isPickerScrolling ? @"spinnig" : @"idle") } );
         };
 
         _reactMinuteInterval = 1;
