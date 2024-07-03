@@ -61,7 +61,7 @@ NSDate* unixMillisToNSDate (double unixMillis) {
         _props = defaultProps;
         
         _picker = [DatePicker new];
-        __weak RNDatePicker *weakSelf = self;
+        __weak __typeof(self) weakSelf = self;
         _picker.onChange = ^(NSDictionary *event) {
             std::dynamic_pointer_cast<const RNDatePickerEventEmitter>(_eventEmitter)
             ->onChange(RNDatePickerEventEmitter::OnChange{ .timestamp = _picker.selectedDate.timeIntervalSince1970 * 1000.0f });
@@ -85,12 +85,14 @@ NSDate* unixMillisToNSDate (double unixMillis) {
         [self addSubview:_picker];
         _picker.translatesAutoresizingMaskIntoConstraints = NO;
         
-        [_picker.leadingAnchor constraintEqualToAnchor:self.leadingAnchor].active = YES;
-        [_picker.trailingAnchor constraintEqualToAnchor:self.trailingAnchor].active = YES;
-        [_picker.topAnchor constraintEqualToAnchor:self.topAnchor].active = YES;
-        [_picker.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
+        [NSLayoutConstraint activateConstraints:@[
+            [_picker.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
+            [_picker.trailingAnchor constraintEqualToAnchor:self.trailingAnchor],
+            [_picker.topAnchor constraintEqualToAnchor:self.topAnchor],
+            [_picker.bottomAnchor constraintEqualToAnchor:self.bottomAnchor]
+        ]];
         
-        __weak RNDatePicker *weakSelf = self;
+        __weak typeof(self) weakSelf = self;
         _picker.onChange = ^(NSDictionary *event) {
             if (weakSelf.onChange) {
                 weakSelf.onChange(event);
