@@ -16,10 +16,22 @@ export const DatePickerIOS = (props) => {
     [props]
   )
 
+  const onSpinnerStateChanged = useCallback(
+    /**
+     * @param {{ nativeEvent: { state: "spinning" | "idle" } }} event
+     */
+    (event) => {
+      const spinnerState = event.nativeEvent.state
+      if (props.onStateChange) props.onStateChange(spinnerState)
+    },
+    [props]
+  )
+
   /** @type {NativeProps}  */
   const modifiedProps = {
     ...props,
     onChange,
+    onStateChange: onSpinnerStateChanged,
     style: [styles.datePickerIOS, props.style],
     date: props.date ? props.date.getTime() : undefined,
     locale: props.locale ? props.locale : undefined,

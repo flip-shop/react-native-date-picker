@@ -1,4 +1,6 @@
 #import "RNDatePicker.h"
+#import "react_native_date_picker-Swift.h"
+#import <Foundation/Foundation.h>
 
 #ifdef RCT_NEW_ARCH_ENABLED
 #import "RCTConvert.h"
@@ -18,9 +20,6 @@ using namespace facebook::react;
 #endif
 
 
-#import "DatePicker.h"
-
-
 #ifdef RCT_NEW_ARCH_ENABLED
 @interface RNDatePicker () <RCTRNDatePickerViewProtocol>
 @end
@@ -28,6 +27,7 @@ using namespace facebook::react;
 @interface RNDatePicker ()
 
 @property (nonatomic, copy) RCTBubblingEventBlock onChange;
+@property (nonatomic, copy) RCTBubblingEventBlock onStateChange;
 @property (nonatomic, assign) NSInteger reactMinuteInterval;
 
 @end
@@ -60,12 +60,17 @@ NSDate* unixMillisToNSDate (double unixMillis) {
         static const auto defaultProps = std::make_shared<const RNDatePickerProps>();
         _props = defaultProps;
         
-        _picker = [[DatePicker alloc] initWithFrame:_view.bounds];
-        [_picker setup];
-        
-        [_picker addTarget:self action:@selector(didChange:)
-          forControlEvents:UIControlEventValueChanged];
-        
+        _picker = [DatePicker new];
+        __weak __typeof(self) weakSelf = self;
+        _picker.onChange = ^(NSDictionary *event) {
+            std::dynamic_pointer_cast<const RNDatePickerEventEmitter>(_eventEmitter)
+            ->onChange(RNDatePickerEventEmitter::OnChange{ .timestamp = _picker.selectedDate.timeIntervalSince1970 * 1000.0f });
+        };
+        _picker.onStateChange = ^(NSDictionary *event) {
+            std::dynamic_pointer_cast<const RNDatePickerEventEmitter>(_eventEmitter)
+            ->onStateChange(RNDatePickerEventEmitter::OnStateChange { .state = RCTStringFromNSString(_picker.isPickerScrolling ? @"spinnig" : @"idle") } );
+        };
+
         _reactMinuteInterval = 1;
         
         self.contentView = _picker;
@@ -76,9 +81,28 @@ NSDate* unixMillisToNSDate (double unixMillis) {
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        [self setup];
-        [self addTarget:self action:@selector(didChange)
-       forControlEvents:UIControlEventValueChanged];
+        _picker = [DatePicker new];
+        [self addSubview:_picker];
+        _picker.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        [NSLayoutConstraint activateConstraints:@[
+            [_picker.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
+            [_picker.trailingAnchor constraintEqualToAnchor:self.trailingAnchor],
+            [_picker.topAnchor constraintEqualToAnchor:self.topAnchor],
+            [_picker.bottomAnchor constraintEqualToAnchor:self.bottomAnchor]
+        ]];
+        
+        __weak typeof(self) weakSelf = self;
+        _picker.onChange = ^(NSDictionary *event) {
+            if (weakSelf.onChange) {
+                weakSelf.onChange(event);
+            }
+        };
+        _picker.onStateChange = ^(NSDictionary *event) {
+            if (weakSelf.onStateChange) {
+                weakSelf.onStateChange(event);
+            }
+        };
         _reactMinuteInterval = 1;
     }
     return self;
@@ -99,29 +123,29 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     const auto &oldViewProps = *std::static_pointer_cast<RNDatePickerProps const>(oldProps ? oldProps : _props); //_props equ
     const auto &newViewProps = *std::static_pointer_cast<RNDatePickerProps const>(props);
     
-    //  date
-    if(oldViewProps.date != newViewProps.date) {
-        [_picker setDate: unixMillisToNSDate(newViewProps.date)];
+    // date
+    if (oldViewProps.date != newViewProps.date) {
+        [_picker setDate:unixMillisToNSDate(newViewProps.date)];
     }
     
-    //  locale
-    if(oldViewProps.locale != newViewProps.locale) {
+    // locale
+    if (oldViewProps.locale != newViewProps.locale) {
         NSString *convertedLocale = RCTNSStringFromString(newViewProps.locale);
         NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:convertedLocale];
         [_picker setLocale:locale];
     }
     
     // maximumDate
-    if(oldViewProps.maximumDate != newViewProps.maximumDate) {
-        [_picker setMaximumDate: unixMillisToNSDate(newViewProps.maximumDate)];
+    if (oldViewProps.maximumDate != newViewProps.maximumDate) {
+        [_picker setMaximumDate:unixMillisToNSDate(newViewProps.maximumDate)];
     }
     
-    //  minimumDate
-    if(oldViewProps.minimumDate != newViewProps.minimumDate) {
-        [_picker setMinimumDate: unixMillisToNSDate(newViewProps.minimumDate)];
+    // minimumDate
+    if (oldViewProps.minimumDate != newViewProps.minimumDate) {
+        [_picker setMinimumDate:unixMillisToNSDate(newViewProps.minimumDate)];
     }
     
-    //  setMinuteInterval
+    // minuteInterval
     if (oldViewProps.minuteInterval != newViewProps.minuteInterval) {
         [_picker setMinuteInterval:newViewProps.minuteInterval];
         _reactMinuteInterval = newViewProps.minuteInterval;
@@ -129,32 +153,30 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     
     // mode
     if (oldViewProps.mode != newViewProps.mode) {
-        if(newViewProps.mode == RNDatePickerMode::Time) [_picker setDatePickerMode:UIDatePickerModeTime];
-        if(newViewProps.mode == RNDatePickerMode::Date) [_picker setDatePickerMode:UIDatePickerModeDate];
-        if(newViewProps.mode == RNDatePickerMode::Datetime) [_picker setDatePickerMode:UIDatePickerModeDateAndTime];
-        // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
-        _picker.minuteInterval = _reactMinuteInterval;
+        UIDatePickerMode mode = UIDatePickerModeDate;
+        if (newViewProps.mode == RNDatePickerMode::Time) {
+            mode = UIDatePickerModeTime;
+        } else if (newViewProps.mode == RNDatePickerMode::Date) {
+            mode = UIDatePickerModeDate;
+        } else if (newViewProps.mode == RNDatePickerMode::Datetime) {
+            mode = UIDatePickerModeDateAndTime;
+        }
+        [_picker setDatePickerMode:mode];
     }
     
-    //  timeZoneOffsetInMinutes
+    // timeZoneOffsetInMinutes
     if (oldViewProps.timeZoneOffsetInMinutes != newViewProps.timeZoneOffsetInMinutes) {
         NSString *newString = RCTNSStringFromString(newViewProps.timeZoneOffsetInMinutes);
         [_picker setTimeZoneOffsetInMinutes:newString];
     }
     
     // text color
-    if(oldViewProps.textColor != newViewProps.textColor){
+    if (oldViewProps.textColor != newViewProps.textColor) {
         NSString *textColor = RCTNSStringFromString(newViewProps.textColor);
         [_picker setTextColorProp:textColor];
     }
     
     [super updateProps:props oldProps:oldProps];
-}
-
--(void)didChange:(RNDatePicker *)sender
-{
-    std::dynamic_pointer_cast<const RNDatePickerEventEmitter>(_eventEmitter)
-    ->onChange(RNDatePickerEventEmitter::OnChange{ .timestamp = _picker.date.timeIntervalSince1970 * 1000.0f });
 }
 
 
@@ -164,24 +186,46 @@ Class<RCTComponentViewProtocol> RNDatePickerCls(void)
 }
 
 #else
-- (void)didChange
-{
-    if (_onChange) {
-        _onChange(@{ @"timestamp": @(self.date.timeIntervalSince1970 * 1000.0) });
-    }
-}
-
 - (void)setDatePickerMode:(UIDatePickerMode)datePickerMode
 {
-  [super setDatePickerMode:datePickerMode];
-  // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
-  self.minuteInterval = _reactMinuteInterval;
+  [_picker setDatePickerMode:datePickerMode];
+  [_picker setMinuteInterval:_reactMinuteInterval];
 }
 
 - (void)setMinuteInterval:(NSInteger)minuteInterval
 {
-  [super setMinuteInterval:minuteInterval];
+  [_picker setMinuteInterval:minuteInterval];
   _reactMinuteInterval = minuteInterval;
+}
+
+- (void)setMinimumDate:(NSDate*)minimumDate
+{
+    [_picker setMinimumDate:minimumDate];
+}
+
+- (void)setMaximumDate:(NSDate*)maximumDate
+{
+    [_picker setMaximumDate:maximumDate];
+}
+
+- (void)setTimeZoneOffsetInMinutes:(NSString*)timeZoneProp
+{
+    [_picker setTimeZoneOffsetInMinutes:timeZoneProp];
+}
+
+- (void)setTextColorProp:(NSString*)textColor
+{
+    [_picker setTextColorProp:textColor];
+}
+
+- (void)setLocale:(NSLocale*)locale
+{
+    [_picker setLocale:locale];
+}
+
+- (void)setDate:(NSDate*)date
+{
+    [_picker setDate:date];
 }
 
 #endif
