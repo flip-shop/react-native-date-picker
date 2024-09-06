@@ -18,6 +18,8 @@ extension DatePicker {
             createDateAndTimeModeManager()
         case .countDownTimer:
             createDateModeManager()
+        default:
+            createDateModeManager()
         }
     }
 
