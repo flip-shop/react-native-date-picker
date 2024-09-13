@@ -39,7 +39,7 @@ import UIKit
 
     public var isPickerScrolling = false {
         didSet {
-            onStateChange?(["state": isPickerScrolling ? "spinnig" : "idle"])
+            onStateChange?(["state": isPickerScrolling ? "spinning" : "idle"])
         }
     }
 
