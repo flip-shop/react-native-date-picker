@@ -92,7 +92,7 @@ NSDate* unixMillisToNSDate (double unixMillis) {
             [_picker.bottomAnchor constraintEqualToAnchor:self.bottomAnchor]
         ]];
         
-        __weak typeof(self) weakSelf = self;
+        __weak __typeof__(self) weakSelf = self;
         _picker.onChange = ^(NSDictionary *event) {
             if (weakSelf.onChange) {
                 weakSelf.onChange(event);
