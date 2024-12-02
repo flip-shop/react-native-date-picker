@@ -32,7 +32,14 @@ public class Utils {
         if(dateString == null) return null;
         try {
             Calendar calendar = Calendar.getInstance(timeZone);
-            calendar.setTime(getIsoUTCFormat().parse(dateString));
+            // https://github.com/henninghall/react-native-date-picker/pull/848/commits/809faeca90f87ce37a3850234b1b952395900d95
+            // Check if the string is a numeric timestamp (positive or negative)
+            if (dateString.matches("-?\\d+")) {  // Matches both positive and negative numbers
+                long timestamp = Long.parseLong(dateString);
+                calendar.setTimeInMillis(timestamp);
+            } else {
+                calendar.setTime(getIsoUTCFormat().parse(dateString));
+            }
             return calendar;
         } catch (ParseException e) {
             e.printStackTrace();
