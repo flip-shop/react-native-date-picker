@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -29,20 +30,24 @@ public class Utils {
     }
 
     public static Calendar isoToCalendar(String dateString, TimeZone timeZone)  {
-        if(dateString == null) return null;
+        if (dateString == null) return null;
         try {
             Calendar calendar = Calendar.getInstance(timeZone);
-            // https://github.com/henninghall/react-native-date-picker/pull/848/commits/809faeca90f87ce37a3850234b1b952395900d95
-            // Check if the string is a numeric timestamp (positive or negative)
-            if (dateString.matches("-?\\d+")) {  // Matches both positive and negative numbers
+            
+            try {
+                // Check if the string is a numeric timestamp
                 long timestamp = Long.parseLong(dateString);
                 calendar.setTimeInMillis(timestamp);
-            } else {
-                calendar.setTime(getIsoUTCFormat().parse(dateString));
+            } catch (NumberFormatException ex) {
+                // Fallback to parsing as ISO UTC format
+                Date parsedDate = getIsoUTCFormat().parse(dateString);
+                calendar.setTime(parsedDate);
             }
+
+            // Ensure the time zone is applied
+            calendar.setTimeZone(timeZone);
             return calendar;
         } catch (ParseException e) {
-            e.printStackTrace();
             return null;
         }
     }
