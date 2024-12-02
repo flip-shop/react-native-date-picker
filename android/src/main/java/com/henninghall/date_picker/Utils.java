@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -29,13 +30,24 @@ public class Utils {
     }
 
     public static Calendar isoToCalendar(String dateString, TimeZone timeZone)  {
-        if(dateString == null) return null;
+        if (dateString == null) return null;
         try {
             Calendar calendar = Calendar.getInstance(timeZone);
-            calendar.setTime(getIsoUTCFormat().parse(dateString));
+            
+            try {
+                // Check if the string is a numeric timestamp
+                long timestamp = Long.parseLong(dateString);
+                calendar.setTimeInMillis(timestamp);
+            } catch (NumberFormatException ex) {
+                // Fallback to parsing as ISO UTC format
+                Date parsedDate = getIsoUTCFormat().parse(dateString);
+                calendar.setTime(parsedDate);
+            }
+
+            // Ensure the time zone is applied
+            calendar.setTimeZone(timeZone);
             return calendar;
         } catch (ParseException e) {
-            e.printStackTrace();
             return null;
         }
     }
