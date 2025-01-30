@@ -25,6 +25,8 @@ const DatePickerWrapper = (props) => {
       cancelText={props.cancelText ? props.cancelText : 'Cancel'}
       minuteInterval={props.minuteInterval ? props.minuteInterval : 1}
       mode={props.mode ? props.mode : 'datetime'}
+      minimumDuration={props.minimumDuration}
+      maximumDuration={props.maximumDuration}
       timeZoneOffsetInMinutes={
         props.timeZoneOffsetInMinutes == null
           ? ''
