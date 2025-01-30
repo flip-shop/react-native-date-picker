@@ -37,6 +37,8 @@ export const DatePickerIOS = (props) => {
     locale: props.locale ? props.locale : undefined,
     maximumDate: props.maximumDate ? props.maximumDate.getTime() : undefined,
     minimumDate: props.minimumDate ? props.minimumDate.getTime() : undefined,
+    minimumDuration: props.minimumDuration || 60,
+    maximumDuration: props.maximumDuration ? props.maximumDuration : undefined,
     theme: props.theme ? props.theme : 'auto',
   }
 
