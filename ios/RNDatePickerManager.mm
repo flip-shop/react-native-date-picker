@@ -113,8 +113,7 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         if(textColor) [picker setTextColorProp:textColor];
         
         NSString * mode = [RCTConvert NSString:[props objectForKey:@"mode"]];
-        //MARK: change on real value
-        if(mode) [picker setDatePickerMode:@"duration"];
+        if(mode) [picker setDatePickerMode:mode];
         
         NSLocale * locale = [RCTConvert NSLocale:[props objectForKey:@"locale"]];
         if(locale) [picker setLocale:locale];

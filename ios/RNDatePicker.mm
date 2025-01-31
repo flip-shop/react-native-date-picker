@@ -153,14 +153,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     
     // mode
     if (oldViewProps.mode != newViewProps.mode) {
-        UIDatePickerMode mode = UIDatePickerModeDate;
-        if (newViewProps.mode == RNDatePickerMode::Time) {
-            mode = UIDatePickerModeTime;
-        } else if (newViewProps.mode == RNDatePickerMode::Date) {
-            mode = UIDatePickerModeDate;
-        } else if (newViewProps.mode == RNDatePickerMode::Datetime) {
-            mode = UIDatePickerModeDateAndTime;
-        }
+        NSString *mode = RCTNSStringFromString(newViewProps.mode);
         [_picker setDatePickerMode:mode];
     }
     

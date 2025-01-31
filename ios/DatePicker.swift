@@ -90,9 +90,7 @@ import UIKit
     public func setDatePickerMode(_ mode: String?) {
         guard let mode, let pickerMode = DatePickerMode(rawValue: mode) else { return }
 
-        // MARK: remove before commit
-
-        self.pickerMode = .duration
+        self.pickerMode = pickerMode
     }
 
     public func setTimeZoneOffsetInMinutes(_ timeZoneOffsetInMinutes: String) {
@@ -145,6 +143,4 @@ import UIKit
         let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: locale) ?? ""
         return dateFormat.contains("H") || dateFormat.contains("k")
     }
-
-    // MARK: unit labels
 }
