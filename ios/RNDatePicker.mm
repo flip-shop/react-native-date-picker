@@ -186,7 +186,7 @@ Class<RCTComponentViewProtocol> RNDatePickerCls(void)
 }
 
 #else
-- (void)setDatePickerMode:(UIDatePickerMode)datePickerMode
+- (void)setDatePickerMode:(NSString*)datePickerMode
 {
   [_picker setDatePickerMode:datePickerMode];
   [_picker setMinuteInterval:_reactMinuteInterval];

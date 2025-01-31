@@ -7,17 +7,6 @@
 #import "react_native_date_picker-Swift.h"
 #import "RNDatePicker.h"
 
-@implementation RCTConvert(UIDatePicker)
-
-RCT_ENUM_CONVERTER(UIDatePickerMode, (@{
-  @"time": @(UIDatePickerModeTime),
-  @"date": @(UIDatePickerModeDate),
-  @"datetime": @(UIDatePickerModeDateAndTime),
-  @"countdown": @(UIDatePickerModeCountDownTimer), // not supported yet
-}), UIDatePickerModeTime, integerValue)
-
-@end
-
 @implementation RNDatePickerManager
 
 RCT_EXPORT_MODULE(RNDatePicker)
@@ -43,7 +32,7 @@ RCT_EXPORT_VIEW_PROPERTY(maximumDate, NSDate)
 RCT_EXPORT_VIEW_PROPERTY(minuteInterval, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStateChange, RCTBubblingEventBlock)
-RCT_REMAP_VIEW_PROPERTY(mode, datePickerMode, UIDatePickerMode)
+RCT_REMAP_VIEW_PROPERTY(mode, datePickerMode, NSString)
 
 RCT_CUSTOM_VIEW_PROPERTY(timeZoneOffsetInMinutes, NSString, DatePicker)
 {
@@ -123,8 +112,9 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         NSString * textColor = [RCTConvert NSString:[props objectForKey:@"textColor"]];
         if(textColor) [picker setTextColorProp:textColor];
         
-        UIDatePickerMode mode = [RCTConvert UIDatePickerMode:[props objectForKey:@"mode"]];
-        [picker setDatePickerMode:mode];
+        NSString * mode = [RCTConvert NSString:[props objectForKey:@"mode"]];
+        //MARK: change on real value
+        if(mode) [picker setDatePickerMode:@"duration"];
         
         NSLocale * locale = [RCTConvert NSLocale:[props objectForKey:@"locale"]];
         if(locale) [picker setLocale:locale];

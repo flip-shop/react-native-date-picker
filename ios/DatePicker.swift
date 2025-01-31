@@ -9,7 +9,6 @@ import UIKit
 
 @objc(DatePicker)
 @objcMembers public class DatePicker: UIPickerView {
-    private(set) var calendar: Calendar = .init(identifier: .gregorian)
     public var selectedDate: Date = .init()
     public var minimumDate: Date?
     public var maximumDate: Date?
@@ -25,21 +24,27 @@ import UIKit
 
     public var minuteInterval: Int = 1 {
         didSet {
-            if [.dateAndTime, .countDownTimer, .time].contains(datePickerMode) {
+            if [.dateAndTime, .time].contains(pickerMode) {
                 dataManager = createDataManager()
             }
         }
     }
 
-    public var datePickerMode: UIDatePicker.Mode = .date {
+    public var isPickerScrolling = false {
         didSet {
-            dataManager = createDataManager()
+            onStateChange?(["state": isPickerScrolling ? Constants.spinningState : Constants.idleState])
         }
     }
 
-    public var isPickerScrolling = false {
+    private(set) var calendar: Calendar = .init(identifier: .gregorian)
+    private(set) lazy var dayUnitLabel = makeUnitLabel()
+    private(set) lazy var hourUnitLabel = makeUnitLabel()
+    private(set) lazy var minuteUnitLabel = makeUnitLabel()
+
+    private(set) var pickerMode: DatePickerMode = .duration {
         didSet {
-            onStateChange?(["state": isPickerScrolling ? "spinning" : "idle"])
+            dataManager = createDataManager()
+            configureUnitLabels()
         }
     }
 
@@ -60,6 +65,12 @@ import UIKit
         setup()
     }
 
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        guard pickerMode == .duration else { return }
+        positionUnitLabels()
+    }
+
     public func setup() {
         nativeID = "ignoreScroll"
         overrideUserInterfaceStyle = .light
@@ -69,11 +80,19 @@ import UIKit
     }
 
     public func setTextColorProp(_ hexColor: String?) {
-        if hexColor == "#000000" {
+        if hexColor == Constants.lightColor {
             overrideUserInterfaceStyle = .light
-        } else if hexColor?.lowercased() == "#ffffff" {
+        } else if hexColor?.lowercased() == Constants.darkColor {
             overrideUserInterfaceStyle = .dark
         }
+    }
+
+    public func setDatePickerMode(_ mode: String?) {
+        guard let mode, let pickerMode = DatePickerMode(rawValue: mode) else { return }
+
+        // MARK: remove before commit
+
+        self.pickerMode = .duration
     }
 
     public func setTimeZoneOffsetInMinutes(_ timeZoneOffsetInMinutes: String) {
@@ -86,13 +105,14 @@ import UIKit
     }
 
     public func setDate(_ date: Date) {
+        guard pickerMode != .duration else { return }
         let components = calendar.dateComponents(dataManager.components, from: date)
         dataManager.collections.enumerated().map { index, collection in
             var row: Int? = nil
             switch collection.component {
             case .year:
                 row = collection.getRowForValue("\(components.year ?? 0)")
-            case .day where datePickerMode == .dateAndTime:
+            case .day where pickerMode == .dateAndTime:
                 row = (calendar.ordinality(of: .day, in: .year, for: date) ?? 1) - 1
             case .month, .day:
                 row = collection.middleRow + (components.value(for: collection.component) ?? 0) - 1
@@ -125,4 +145,6 @@ import UIKit
         let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: locale) ?? ""
         return dateFormat.contains("H") || dateFormat.contains("k")
     }
+
+    // MARK: unit labels
 }
