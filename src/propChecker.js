@@ -29,7 +29,7 @@ class PropCheck {
 }
 
 const dateCheck = new PropCheck(
-  (props) => props && !(props.date instanceof Date),
+  (props) => props && !(props.date instanceof Date) && !(props.mode === 'duration'),
   'Invalid or missing Date prop. Must be a Date object.'
 )
 
@@ -53,8 +53,8 @@ const heightCheck = new PropCheck(
 
 const modeCheck = new PropCheck(
   (props) =>
-    props && props.mode && !['datetime', 'date', 'time'].includes(props.mode),
-  "Invalid mode. Valid modes: 'datetime', 'date', 'time'"
+    props && props.mode && !['datetime', 'date', 'time', 'duration'].includes(props.mode),
+  "Invalid mode. Valid modes: 'datetime', 'date', 'time', 'duration'"
 )
 
 const themeCheck = new PropCheck(
