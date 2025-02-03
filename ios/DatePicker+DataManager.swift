@@ -9,17 +9,15 @@ import Foundation
 
 extension DatePicker {
     public func createDataManager() -> DataManager {
-        switch datePickerMode {
+        switch pickerMode {
         case .time:
             createTimeModeManager()
         case .date:
             createDateModeManager()
         case .dateAndTime:
             createDateAndTimeModeManager()
-        case .countDownTimer:
-            createDateModeManager()
-        default:
-            createDateModeManager()
+        case .duration:
+            createDurationModeManager()
         }
     }
 
@@ -64,14 +62,12 @@ extension DatePicker {
         return DataManager(collections: [days, hours, minutes, nanoseconds].compactMap { $0 })
     }
 
-    private func createCountDownTimer() -> DataManager {
-        let hours = ComponentDataSource(data: (0 ... 23).map { String(format: "%02d", $0) }, component: .hour)
-        let minutes = ComponentInfinityDataSource(
-            data: stride(from: 0, to: 60, by: minuteInterval).map { String(format: "%02d", $0) },
-            component: .minute
-        )
+    private func createDurationModeManager() -> DataManager {
+        let days = ComponentDataSource(data: (0 ... 365).map { "\($0)" }, component: .day)
+        let hours = ComponentDataSource(data: (0 ... 23).map { "\($0)" }, component: .hour)
+        let minutes = ComponentDataSource(data: (0 ... 59).map { "\($0)" }, component: .minute)
 
-        return DataManager(collections: [hours, minutes])
+        return DataManager(collections: [days, hours, minutes])
     }
 
     private func generateAllDaysInYear() -> [String] {
