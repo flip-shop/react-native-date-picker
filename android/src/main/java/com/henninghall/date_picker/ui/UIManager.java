@@ -80,6 +80,10 @@ public class UIManager {
         state.setLastSelectedDate(date);
     }
 
+    public void updateLastSelectedDuration(int duration) {
+        state.setLastSelectedDuration(duration);
+    }
+
     public void setDividerColor(String color) {
         wheels.applyOnAll(new SetDividerColor(color));
     }

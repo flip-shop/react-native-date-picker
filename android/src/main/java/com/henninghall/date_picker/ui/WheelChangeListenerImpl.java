@@ -1,9 +1,11 @@
 package com.henninghall.date_picker.ui;
 
+import android.util.Log;
 import android.view.View;
 
 import com.henninghall.date_picker.Emitter;
 import com.henninghall.date_picker.State;
+import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.wheels.Wheel;
 
 import java.text.ParseException;
@@ -40,15 +42,24 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
     public void onChange(Wheel picker) {
         if(wheels.hasSpinningWheel()) return;
 
+        if (state.getMode() == Mode.duration) { // handle duration differently
+            onDurationChange();
+            return;
+        }
+
         if(!dateExists()){
+            Log.d("37287423789", "!dateExists()");
             Calendar closestExistingDate = getClosestExistingDateInPast();
             if(closestExistingDate != null) {
+                Log.d("37287423789", "closestExistingDate != null");
                 uiManager.animateToDate(closestExistingDate);
             }
             return;
         }
 
         Calendar selectedDate = getSelectedDate();
+        Log.d("37287423789", "selectedDate="+selectedDate);
+
         if(selectedDate == null) return;
 
         Calendar minDate = state.getMinimumDate();
@@ -64,9 +75,30 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
         }
 
         String displayData = uiManager.getDisplayValueString();
+        Log.d("37287423789", "displayData="+displayData);
 
         uiManager.updateLastSelectedDate(selectedDate);
         Emitter.onDateChange(selectedDate, displayData, state.getId(), rootView);
+    }
+
+    private void onDurationChange() {
+
+        int durationS = wheels.getDurationS();
+
+        Integer minDuration = state.getMinimumDurationS();
+        if (minDuration != null && durationS < minDuration) {
+//           todo: uiManager.animateToDuration(minDuration);
+            return;
+        }
+
+        Integer maxDuration = state.getMaximumDurationS();
+        if (maxDuration != null && durationS > maxDuration) {
+//           todo: uiManager.animateToDuration(maxDuration);
+            return;
+        }
+
+        uiManager.updateLastSelectedDuration(durationS);
+        Emitter.onDurationChange(durationS, state.getId(), rootView);
     }
 
     @Override
@@ -82,6 +114,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
     private boolean dateExists(){
         SimpleDateFormat dateFormat = getDateFormat();
         String toParse = wheels.getDateTimeString();
+        Log.d("37287423789", "date="+toParse);
         try {
             dateFormat.setLenient(false); // disallow parsing invalid dates
             dateFormat.parse(toParse);

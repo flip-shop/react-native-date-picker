@@ -107,6 +107,11 @@ public class DayWheel extends Wheel {
     }
 
     @Override
+    public boolean labelVisible() {
+        return false;
+    }
+
+    @Override
     public boolean wrapSelectorWheel() {
         return false;
     }
@@ -114,9 +119,9 @@ public class DayWheel extends Wheel {
 
     @Override
     public String getFormatPattern() {
-       return LocaleUtils.getDatePattern(state.getLocale())
-               .replace("EEEE", "EEE")
-               .replace("MMMM", "MMM");
+        return LocaleUtils.getDatePattern(state.getLocale())
+                .replace("EEEE", "EEE")
+                .replace("MMMM", "MMM");
     }
 
     @Override

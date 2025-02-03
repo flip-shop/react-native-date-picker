@@ -22,6 +22,12 @@ public class DerivedData {
         ArrayList<WheelType> visibleWheels = new ArrayList<>();
         Mode mode = state.getMode();
         switch (mode){
+            case duration:{
+                visibleWheels.add(WheelType.DAYS_DURATION);
+                visibleWheels.add(WheelType.HOUR);
+                visibleWheels.add(WheelType.MINUTE);
+                break;
+            }
             case datetime: {
                 visibleWheels.add(WheelType.DAY);
                 visibleWheels.add(WheelType.HOUR);
@@ -64,9 +70,12 @@ public class DerivedData {
         ArrayList<WheelType> unorderedTypes = new ArrayList(Arrays.asList(WheelType.values()));
         ArrayList<WheelType> orderedWheels = new ArrayList<>();
 
-        // Always put day wheel first
+        // Always put day and days-durations wheel first
         unorderedTypes.remove(WheelType.DAY);
         orderedWheels.add(WheelType.DAY);
+
+        unorderedTypes.remove(WheelType.DAYS_DURATION);
+        orderedWheels.add(WheelType.DAYS_DURATION);
 
         for (char c: dateTimePattern.toCharArray()){
             try {
@@ -100,6 +109,7 @@ public class DerivedData {
     }
 
     public boolean usesAmPm(){
+        if (state.getMode() == Mode.duration) return false; // never use AM/PM for duration
         if(state.getIs24HourSource() == locale) return LocaleUtils.localeUsesAmPm(state.getLocale());
         return Utils.deviceUsesAmPm();
     }

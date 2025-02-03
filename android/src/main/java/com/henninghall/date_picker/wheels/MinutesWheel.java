@@ -2,6 +2,7 @@ package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
 
+import com.henninghall.date_picker.Label;
 import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.Utils;
@@ -12,8 +13,8 @@ import java.util.Calendar;
 
 public class MinutesWheel extends Wheel {
 
-    public MinutesWheel(Picker picker, State id) {
-        super(picker, id);
+    public MinutesWheel(Picker picker, Label label, State id) {
+        super(picker, label, id);
     }
 
     @Override
@@ -33,6 +34,11 @@ public class MinutesWheel extends Wheel {
     @Override
     public boolean visible() {
         return state.getMode() != Mode.date;
+    }
+
+    @Override
+    public boolean labelVisible() {
+        return state.getMode() == Mode.duration;
     }
 
     @Override
