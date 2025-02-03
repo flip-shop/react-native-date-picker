@@ -63,7 +63,7 @@ extension DatePicker {
     }
 
     private func createDurationModeManager() -> DataManager {
-        let days = ComponentDataSource(data: (0 ... 999).map { "\($0)" }, component: .day)
+        let days = ComponentDataSource(data: (0 ... 365).map { "\($0)" }, component: .day)
         let hours = ComponentDataSource(data: (0 ... 23).map { "\($0)" }, component: .hour)
         let minutes = ComponentDataSource(data: (0 ... 59).map { "\($0)" }, component: .minute)
 
