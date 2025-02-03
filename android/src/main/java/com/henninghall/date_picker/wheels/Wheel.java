@@ -3,7 +3,12 @@ package com.henninghall.date_picker.wheels;
 import android.graphics.Paint;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
+
+import com.henninghall.date_picker.Label;
 import com.henninghall.date_picker.models.Mode;
+import com.henninghall.date_picker.models.WheelType;
 import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.State;
 
@@ -18,6 +23,7 @@ public abstract class Wheel {
     private Calendar userSetValue;
 
     public abstract boolean visible();
+    public abstract boolean labelVisible();
     public abstract boolean wrapSelectorWheel();
     public abstract Paint.Align getTextAlign();
     public abstract String getFormatPattern();
@@ -29,7 +35,17 @@ public abstract class Wheel {
 
     private ArrayList<String> values = new ArrayList<>();
     public Picker picker;
+    @Nullable public Label label;
     public SimpleDateFormat format;
+
+    public Wheel(Picker picker, @Nullable Label label, State state) {
+        this.state = state;
+        this.picker = picker;
+        this.label = label;
+        this.format = new SimpleDateFormat(getFormatPattern(), state.getLocale());
+        picker.setTextAlign(getTextAlign());
+        picker.setWrapSelectorWheel(wrapSelectorWheel());
+    }
 
     public Wheel(Picker picker, State state) {
         this.state = state;
@@ -110,6 +126,11 @@ public abstract class Wheel {
     public void updateVisibility(){
         int visibility = visible() ? View.VISIBLE: View.GONE;
         picker.setVisibility(visibility);
+
+        if (label != null) { // Just date/hour/minute wheel has the label
+            int labelVisibility = labelVisible() ? View.VISIBLE : View.GONE;
+            label.setVisibility(labelVisibility);
+        }
     }
 
     private SimpleDateFormat getFormat(Locale locale) {
