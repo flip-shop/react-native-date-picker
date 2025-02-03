@@ -32,6 +32,8 @@ RCT_EXPORT_VIEW_PROPERTY(maximumDate, NSDate)
 RCT_EXPORT_VIEW_PROPERTY(minuteInterval, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStateChange, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(minimumDuration, NSInteger)
+RCT_EXPORT_VIEW_PROPERTY(maximumDuration, NSInteger)
 RCT_REMAP_VIEW_PROPERTY(mode, datePickerMode, NSString)
 
 RCT_CUSTOM_VIEW_PROPERTY(timeZoneOffsetInMinutes, NSString, DatePicker)
@@ -120,6 +122,12 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
 
         int minuteInterval = [RCTConvert int:[props objectForKey:@"minuteInterval"]];
         [picker setMinuteInterval:minuteInterval];
+        
+        int minimumDuration = [RCTConvert int:[props objectForKey:@"minimumDuration"]];
+        if(minimumDuration) [picker setMinimumDuration:minimumDuration];
+
+        int maximumDuration = [RCTConvert int:[props objectForKey:@"maximumDuration"]];
+        if(maximumDuration) [picker setMaximumDuration:maximumDuration];
 
         NSString * timeZoneProp = [props valueForKey:@"timeZoneOffsetInMinutes"];
         if(timeZoneProp) [picker setTimeZoneOffsetInMinutes:timeZoneProp];

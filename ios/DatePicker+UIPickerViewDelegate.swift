@@ -150,6 +150,15 @@ extension DatePicker: UIPickerViewDelegate {
             }
         }
 
+        if let minDuration, timeInterval < minDuration {
+            timeInterval = minDuration
+            setDuration(timeInterval)
+        }
+        if let maxDuration, timeInterval > maxDuration {
+            timeInterval = maxDuration
+            setDuration(timeInterval)
+        }
+
         onChange?(["timestamp": timeInterval])
     }
 }

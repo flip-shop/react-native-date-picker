@@ -11,6 +11,9 @@ enum Constants {
     static let secsInDay: Int = 86400
     static let secsInHour: Int = 3600
     static let secsInMinute: Int = 60
+    static let maxHours: Int = 23
+    static let maxMinutes: Int = 59
+    static let maxDays: Int = 365
 
     // MARK: picker colors
 

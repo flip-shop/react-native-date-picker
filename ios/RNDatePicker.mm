@@ -168,6 +168,16 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         NSString *textColor = RCTNSStringFromString(newViewProps.textColor);
         [_picker setTextColorProp:textColor];
     }
+
+    // minimumDuration
+    if (oldViewProps.minimumDuration != newViewProps.minimumDuration) {
+        [_picker setMinimumDuration:newViewProps.minimumDuration];
+    }
+
+    // maximumDuration
+    if (oldViewProps.maximumDuration != newViewProps.maximumDuration) {
+        [_picker setMaximumDuration:newViewProps.maximumDuration];
+    }
     
     [super updateProps:props oldProps:oldProps];
 }
@@ -219,6 +229,16 @@ Class<RCTComponentViewProtocol> RNDatePickerCls(void)
 - (void)setDate:(NSDate*)date
 {
     [_picker setDate:date];
+}
+
+- (void)setMinimumDuration:(NSInteger)duration
+{
+  [_picker setMinimumDuration:duration];
+}
+
+- (void)setMaximumDuration:(NSInteger)duration
+{
+  [_picker setMaximumDuration:duration];
 }
 
 #endif
