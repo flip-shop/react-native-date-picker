@@ -11,7 +11,9 @@ import com.henninghall.date_picker.props.IdProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
+import com.henninghall.date_picker.props.MaximumDurationProp;
 import com.henninghall.date_picker.props.MinimumDateProp;
+import com.henninghall.date_picker.props.MinimumDurationProp;
 import com.henninghall.date_picker.props.MinuteIntervalProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
@@ -33,7 +35,7 @@ public class DatePickerManager extends SimpleViewManager<PickerView> {
 
     @ReactPropGroup(names = { DateProp.name, ModeProp.name, LocaleProp.name, MaximumDateProp.name,
             MinimumDateProp.name, TextColorProp.name, TimezoneOffsetInMinutesProp.name, MinuteIntervalProp.name,
-            Is24hourSourceProp.name, IdProp.name, DividerColorProp.name
+            Is24hourSourceProp.name, IdProp.name, DividerColorProp.name, MaximumDurationProp.name, MinimumDurationProp.name
     })
     public void setProps(PickerView view, int index, Dynamic value) {
         DatePickerManagerImpl.updateProp("setProps", view, index, value, getClass());

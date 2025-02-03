@@ -9,7 +9,9 @@ import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.props.DividerColorProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
+import com.henninghall.date_picker.props.MaximumDurationProp;
 import com.henninghall.date_picker.props.MinimumDateProp;
+import com.henninghall.date_picker.props.MinimumDurationProp;
 import com.henninghall.date_picker.props.MinuteIntervalProp;
 import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
 import com.henninghall.date_picker.props.DateProp;
@@ -63,6 +65,10 @@ public class PickerView extends RelativeLayout {
 
         if (didUpdate(DividerColorProp.name)) {
             uiManager.setDividerColor(state.getDividerColor());
+        }
+
+        if (didUpdate(MinimumDurationProp.name, MaximumDurationProp.name)) {
+            // todo: update values!
         }
 
         uiManager.setWheelsToDate();
