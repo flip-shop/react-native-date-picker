@@ -63,9 +63,28 @@ extension DatePicker {
     }
 
     private func createDurationModeManager() -> DataManager {
-        let days = ComponentDataSource(data: (0 ... 365).map { "\($0)" }, component: .day)
-        let hours = ComponentDataSource(data: (0 ... 23).map { "\($0)" }, component: .hour)
-        let minutes = ComponentDataSource(data: (0 ... 59).map { "\($0)" }, component: .minute)
+        var daysMinValue = 0
+        var daysMaxValue = Constants.maxDays
+        var hoursMaxValue = Constants.maxHours
+        var minutesMaxValue = Constants.maxMinutes
+        switch (minDuration, maxDuration) {
+        case let (.some(min), .some(max)):
+            daysMinValue = TimeUtils.maxDayValueForInterval(min)
+            daysMaxValue = TimeUtils.maxDayValueForInterval(max)
+            hoursMaxValue = TimeUtils.maxHourValueForInterval(max)
+            minutesMaxValue = TimeUtils.maxMinuteValueForInterval(max)
+        case let (.none, .some(max)):
+            daysMaxValue = TimeUtils.maxDayValueForInterval(max)
+            hoursMaxValue = TimeUtils.maxHourValueForInterval(max)
+            minutesMaxValue = TimeUtils.maxMinuteValueForInterval(max)
+        case let (.some(min), .none):
+            daysMinValue = TimeUtils.maxDayValueForInterval(min)
+        case (.none, .none):
+            break
+        }
+        let days = ComponentDataSource(data: (daysMinValue ... daysMaxValue).map { "\($0)" }, component: .day)
+        let hours = ComponentDataSource(data: (0 ... hoursMaxValue).map { "\($0)" }, component: .hour)
+        let minutes = ComponentDataSource(data: (0 ... minutesMaxValue).map { "\($0)" }, component: .minute)
 
         return DataManager(collections: [days, hours, minutes])
     }

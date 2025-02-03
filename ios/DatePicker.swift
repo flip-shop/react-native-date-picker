@@ -36,17 +36,13 @@ import UIKit
         }
     }
 
+    private(set) var pickerMode: DatePickerMode = .date
+    private(set) var minDuration: Int?
+    private(set) var maxDuration: Int?
     private(set) var calendar: Calendar = .init(identifier: .gregorian)
     private(set) lazy var dayUnitLabel = makeUnitLabel()
     private(set) lazy var hourUnitLabel = makeUnitLabel()
     private(set) lazy var minuteUnitLabel = makeUnitLabel()
-
-    private(set) var pickerMode: DatePickerMode = .duration {
-        didSet {
-            dataManager = createDataManager()
-            configureUnitLabels()
-        }
-    }
 
     private(set) var dataManager: DataManager = .init(collections: []) {
         didSet {
@@ -79,6 +75,20 @@ import UIKit
         dataSource = self
     }
 
+    public func setMinimumDuration(_ duration: Int) {
+        guard duration >= 0, minDuration != duration else { return }
+        minDuration = roundUpToNearestMinute(duration)
+        guard pickerMode == .duration else { return }
+        dataManager = createDataManager()
+    }
+
+    public func setMaximumDuration(_ duration: Int) {
+        guard duration >= 0, maxDuration != duration else { return }
+        maxDuration = roundUpToNearestMinute(duration)
+        guard pickerMode == .duration else { return }
+        dataManager = createDataManager()
+    }
+
     public func setTextColorProp(_ hexColor: String?) {
         if hexColor == Constants.lightColor {
             overrideUserInterfaceStyle = .light
@@ -91,6 +101,9 @@ import UIKit
         guard let mode, let pickerMode = DatePickerMode(rawValue: mode) else { return }
 
         self.pickerMode = pickerMode
+        dataManager = createDataManager()
+        guard pickerMode == .duration else { return }
+        configureUnitLabels()
     }
 
     public func setTimeZoneOffsetInMinutes(_ timeZoneOffsetInMinutes: String) {
@@ -100,6 +113,32 @@ import UIKit
             calendar.timeZone = TimeZone(secondsFromGMT: minutes * 60) ?? TimeZone.current
         }
         dataManager = createDataManager()
+    }
+
+    public func setDuration(_ duration: Int) {
+        guard pickerMode == .duration else { return }
+        let days = duration / Constants.secsInDay
+        let remainderAfterDays = duration % Constants.secsInDay
+        let hours = remainderAfterDays / Constants.secsInHour
+        let remainderAfterHours = remainderAfterDays % Constants.secsInHour
+        let minutes = remainderAfterHours / Constants.secsInMinute
+
+        for (index, collection) in dataManager.collections.enumerated() {
+            var row: Int? = nil
+            switch collection.component {
+            case .day:
+                row = collection.getRowForValue("\(days)")
+            case .hour:
+                row = collection.getRowForValue("\(hours)")
+            case .minute:
+                row = collection.getRowForValue("\(minutes)")
+            default:
+                break
+            }
+            if let row {
+                selectRow(row, inComponent: index, animated: false)
+            }
+        }
     }
 
     public func setDate(_ date: Date) {
@@ -142,5 +181,9 @@ import UIKit
     func is24HourFormat() -> Bool {
         let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: locale) ?? ""
         return dateFormat.contains("H") || dateFormat.contains("k")
+    }
+
+    private func roundUpToNearestMinute(_ seconds: Int) -> Int {
+        seconds % 60 == 0 ? seconds : ((seconds / 60) + 1) * 60
     }
 }
