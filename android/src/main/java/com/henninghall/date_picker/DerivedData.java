@@ -24,7 +24,7 @@ public class DerivedData {
         switch (mode){
             case duration:{
                 visibleWheels.add(WheelType.DURATION_DAYS);
-                visibleWheels.add(WheelType.DURATIONS_HOURS);
+                visibleWheels.add(WheelType.DURATION_HOURS);
                 visibleWheels.add(WheelType.DURATION_MINUTES);
                 break;
             }
@@ -71,10 +71,10 @@ public class DerivedData {
 
         // Always put duration-related wheels and day wheel first
         ArrayList<WheelType> orderedWheels = new ArrayList<>(Arrays.asList(
-                WheelType.DURATION_DAYS, WheelType.DURATIONS_HOURS, WheelType.DURATION_MINUTES, WheelType.DAY
+                WheelType.DURATION_DAYS, WheelType.DURATION_HOURS, WheelType.DURATION_MINUTES, WheelType.DAY
         ));
         unorderedTypes.removeAll(
-                Arrays.asList(WheelType.DURATION_DAYS, WheelType.DURATIONS_HOURS, WheelType.DURATION_MINUTES, WheelType.DAY)
+                Arrays.asList(WheelType.DURATION_DAYS, WheelType.DURATION_HOURS, WheelType.DURATION_MINUTES, WheelType.DAY)
         );
 
         for (char c: dateTimePattern.toCharArray()){

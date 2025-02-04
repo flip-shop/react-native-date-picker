@@ -85,8 +85,8 @@ public class UIManager {
         state.setLastSelectedDate(date);
     }
 
-    public void updateLastSelectedDuration(int duration) {
-        state.setLastSelectedDuration(duration);
+    public void updateLastSelectedDuration(int durationS) {
+        state.setLastSelectedDuration(durationS);
     }
 
     public void setDividerColor(String color) {

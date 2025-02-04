@@ -168,8 +168,6 @@ public class Wheels {
         }
     }
 
-
-
     private ArrayList<Wheel> getOrderedVisibleWheels(){
         ArrayList<Wheel> list = new ArrayList<>();
         for (WheelType type : state.derived.getOrderedVisibleWheels()) {
@@ -216,7 +214,7 @@ public class Wheels {
     private HashMap<WheelType, Wheel> getWheelPerType(){
         return new HashMap<WheelType, Wheel>() {{
             put(WheelType.DURATION_DAYS, daysDurationWheel);
-            put(WheelType.DURATIONS_HOURS, hoursDurationWheel);
+            put(WheelType.DURATION_HOURS, hoursDurationWheel);
             put(WheelType.DURATION_MINUTES, minutesDurationWheel);
             put(WheelType.DAY, dayWheel);
             put(WheelType.YEAR, yearWheel);
