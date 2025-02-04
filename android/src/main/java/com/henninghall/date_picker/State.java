@@ -186,10 +186,12 @@ public class State {
     }
 
     public Integer getMinimumDurationS() {
-        return minimumDurationProp.getValue();
+        Integer min = minimumDurationProp.getValue();
+        return (min != null) ? Math.max(0, min) : null; // ignore negative values
     }
 
     public Integer getMaximumDurationS() {
-        return maximumDurationProp.getValue();
+        Integer max = maximumDurationProp.getValue();
+        return (max != null) ? Math.max(0, max) : null; // ignore negative values
     }
 }

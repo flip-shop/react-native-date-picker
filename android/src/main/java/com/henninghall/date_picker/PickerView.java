@@ -6,21 +6,21 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
+import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.DividerColorProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
+import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
 import com.henninghall.date_picker.props.MaximumDurationProp;
 import com.henninghall.date_picker.props.MinimumDateProp;
 import com.henninghall.date_picker.props.MinimumDurationProp;
 import com.henninghall.date_picker.props.MinuteIntervalProp;
-import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
-import com.henninghall.date_picker.props.DateProp;
-import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
+import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
+import com.henninghall.date_picker.ui.Accessibility;
 import com.henninghall.date_picker.ui.SpinnerStateListener;
 import com.henninghall.date_picker.ui.UIManager;
-import com.henninghall.date_picker.ui.Accessibility;
 
 import java.util.ArrayList;
 
@@ -54,7 +54,7 @@ public class PickerView extends RelativeLayout {
 
         if (didUpdate(DateProp.name, LocaleProp.name,
                 MaximumDateProp.name, MinimumDateProp.name, MinuteIntervalProp.name, ModeProp.name,
-                TimezoneOffsetInMinutesProp.name
+                TimezoneOffsetInMinutesProp.name, MinimumDurationProp.name, MaximumDurationProp.name
         )) {
             uiManager.updateDisplayValues();
         }
@@ -67,10 +67,6 @@ public class PickerView extends RelativeLayout {
             uiManager.setDividerColor(state.getDividerColor());
         }
 
-        if (didUpdate(MinimumDurationProp.name, MaximumDurationProp.name)) {
-            // todo: update values!
-        }
-
         uiManager.setWheelsToDate();
 
         updatedProps = new ArrayList<>();
@@ -78,7 +74,9 @@ public class PickerView extends RelativeLayout {
 
     private boolean didUpdate(String... propNames) {
         for (String propName : propNames) {
-            if (updatedProps.contains(propName)) return true;
+            if (updatedProps.contains(propName)) {
+                return true;
+            }
         }
         return false;
     }

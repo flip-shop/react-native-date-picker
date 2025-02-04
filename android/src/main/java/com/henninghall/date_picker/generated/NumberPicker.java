@@ -168,6 +168,16 @@ public class NumberPicker extends LinearLayout {
      */
     private boolean mWrapSelectorWheelPreferred = true;
 
+    /**
+     * User choice on whether the divider should be visible.
+     */
+    private boolean mShowDivider = true;
+
+
+    public void setDividerVisibility(boolean visible) {
+        mShowDivider = visible;
+    }
+
     protected void setDividerTint(@ColorInt int color) {
         mSelectionDivider.setTint(color);
     }
@@ -1654,7 +1664,7 @@ public class NumberPicker extends LinearLayout {
         }
 
         // draw the selection dividers
-        if (showSelectorWheel && mSelectionDivider != null) {
+        if (mShowDivider && showSelectorWheel && mSelectionDivider != null) {
             // draw the top divider
             int topOfTopDivider = mTopSelectionDividerTop;
             int bottomOfTopDivider = topOfTopDivider + mSelectionDividerHeight;

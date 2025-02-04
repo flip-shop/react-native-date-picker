@@ -107,6 +107,11 @@ public class DayWheel extends Wheel {
     }
 
     @Override
+    public boolean labelVisible() {
+        return false;
+    }
+
+    @Override
     public boolean wrapSelectorWheel() {
         return false;
     }

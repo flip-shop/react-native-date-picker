@@ -1,8 +1,7 @@
 package com.henninghall.date_picker.wheelFunctions;
 
-import android.graphics.Color;
-
 import com.henninghall.date_picker.wheels.Wheel;
+import com.henninghall.date_picker.wheels.duration.DurationWheel;
 
 public class TextColor implements WheelFunction {
 
@@ -15,6 +14,9 @@ public class TextColor implements WheelFunction {
     @Override
     public void apply(Wheel wheel) {
         wheel.picker.setTextColor(color);
+        if (wheel instanceof DurationWheel durationWheel) {
+            durationWheel.label.setTextColor(color);
+        }
     }
 }
 

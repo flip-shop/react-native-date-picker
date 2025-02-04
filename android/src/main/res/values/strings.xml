@@ -4,10 +4,15 @@
     <string name="month_description">Select Month</string>
     <string name="date_description">Select Date</string>
     <string name="day_description">Select Day</string>
+    <string name="days_description">Select Days</string>
     <string name="hour_description">Select Hour</string>
     <string name="minutes_description">Select Minutes</string>
     <string name="ampm_description">Select AM/PM</string>
     <string name="time_tag">Time is</string>
     <string name="hour_tag">Hour :</string>
     <string name="minutes_tag">Minutes </string>
+    <string name="label_date">d</string>
+    <string name="label_hour">h</string>
+    <string name="label_minute">m</string>
+
 </resources>

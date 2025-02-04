@@ -1,14 +1,21 @@
 package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
+
+import com.henninghall.date_picker.Label;
 import com.henninghall.date_picker.models.Mode;
+import com.henninghall.date_picker.models.WheelType;
 import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.State;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -18,6 +25,7 @@ public abstract class Wheel {
     private Calendar userSetValue;
 
     public abstract boolean visible();
+    public abstract boolean labelVisible();
     public abstract boolean wrapSelectorWheel();
     public abstract Paint.Align getTextAlign();
     public abstract String getFormatPattern();
@@ -27,7 +35,7 @@ public abstract class Wheel {
         return value;
     }
 
-    private ArrayList<String> values = new ArrayList<>();
+    protected ArrayList<String> values = new ArrayList<>();
     public Picker picker;
     public SimpleDateFormat format;
 
@@ -99,7 +107,7 @@ public abstract class Wheel {
         return displayValues.toArray(new String[0]);
     }
 
-    private void init(){
+    protected void init(){
         picker.setMinValue(0);
         picker.setMaxValue(0);
         values = getValues();
@@ -126,5 +134,9 @@ public abstract class Wheel {
 
     public void setDividerColor(String color) {
         picker.setDividerColor(color);
+    }
+
+    public void setDividerVisibility(boolean visible) {
+        picker.setDividerVisibility(visible);
     }
 }
