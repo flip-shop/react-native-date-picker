@@ -1,5 +1,6 @@
 package com.henninghall.date_picker;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -54,7 +55,7 @@ public class PickerView extends RelativeLayout {
 
         if (didUpdate(DateProp.name, LocaleProp.name,
                 MaximumDateProp.name, MinimumDateProp.name, MinuteIntervalProp.name, ModeProp.name,
-                TimezoneOffsetInMinutesProp.name
+                TimezoneOffsetInMinutesProp.name, MinimumDurationProp.name
         )) {
             uiManager.updateDisplayValues();
         }
@@ -67,10 +68,6 @@ public class PickerView extends RelativeLayout {
             uiManager.setDividerColor(state.getDividerColor());
         }
 
-        if (didUpdate(MinimumDurationProp.name, MaximumDurationProp.name)) {
-            // todo: update values!
-        }
-
         uiManager.setWheelsToDate();
 
         updatedProps = new ArrayList<>();
@@ -78,7 +75,9 @@ public class PickerView extends RelativeLayout {
 
     private boolean didUpdate(String... propNames) {
         for (String propName : propNames) {
-            if (updatedProps.contains(propName)) return true;
+            if (updatedProps.contains(propName)) {
+                return true;
+            }
         }
         return false;
     }

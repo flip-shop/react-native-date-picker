@@ -12,12 +12,15 @@ import com.henninghall.date_picker.wheelFunctions.WheelFunction;
 import com.henninghall.date_picker.wheels.AmPmWheel;
 import com.henninghall.date_picker.wheels.DateWheel;
 import com.henninghall.date_picker.wheels.DayWheel;
-import com.henninghall.date_picker.wheels.DaysDurationWheel;
+import com.henninghall.date_picker.wheels.duration.DaysDurationWheel;
 import com.henninghall.date_picker.wheels.HourWheel;
 import com.henninghall.date_picker.wheels.MinutesWheel;
 import com.henninghall.date_picker.wheels.MonthWheel;
 import com.henninghall.date_picker.wheels.Wheel;
 import com.henninghall.date_picker.wheels.YearWheel;
+import com.henninghall.date_picker.wheels.duration.DurationWheel;
+import com.henninghall.date_picker.wheels.duration.HoursDurationWheel;
+import com.henninghall.date_picker.wheels.duration.MinutesDurationWheel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,9 +30,13 @@ import java.util.List;
 public class Wheels {
 
     private final State state;
+
+    private DaysDurationWheel daysDurationWheel;
+    private HoursDurationWheel hoursDurationWheel;
+    private MinutesDurationWheel minutesDurationWheel;
+
     private HourWheel hourWheel;
     private DayWheel dayWheel;
-    private DaysDurationWheel daysDurationWheel;
     private MinutesWheel minutesWheel;
     private AmPmWheel ampmWheel;
     private DateWheel dateWheel;
@@ -45,14 +52,17 @@ public class Wheels {
         this.rootView = rootView;
         pickerWrapper = new PickerWrapper(rootView);
 
+        daysDurationWheel = new DaysDurationWheel(getPickerWithId(R.id.durationDays), getLabelWithId(R.id.labelDate), state);
+        hoursDurationWheel = new HoursDurationWheel(getPickerWithId(R.id.durationHours), getLabelWithId(R.id.labelHour), state);
+        minutesDurationWheel = new MinutesDurationWheel(getPickerWithId(R.id.durationMinutes), getLabelWithId(R.id.labelMinutes), state);
+
         yearWheel = new YearWheel(getPickerWithId(R.id.year), state);
         monthWheel = new MonthWheel(getPickerWithId(R.id.month), state);
         dateWheel = new DateWheel(getPickerWithId(R.id.date), state);
         dayWheel = new DayWheel(getPickerWithId(R.id.day), state);
-        daysDurationWheel = new DaysDurationWheel(getPickerWithId(R.id.day), getLabelWithId(R.id.labelDate), state);
-        minutesWheel = new MinutesWheel(getPickerWithId(R.id.minutes), getLabelWithId(R.id.labelMinutes), state);
+        minutesWheel = new MinutesWheel(getPickerWithId(R.id.minutes), state);
         ampmWheel = new AmPmWheel(getPickerWithId(R.id.ampm), state);
-        hourWheel = new HourWheel(getPickerWithId(R.id.hour), getLabelWithId(R.id.labelHour), state);
+        hourWheel = new HourWheel(getPickerWithId(R.id.hour), state);
         wheelPerWheelType = getWheelPerType();
         changeAmPmWhenPassingMidnightOrNoon();
     }
@@ -116,12 +126,13 @@ public class Wheels {
     }
 
     int getDurationS() {
-        // todo: format to receive an appropriate format, confirmed with JS side
         int days = Integer.parseInt(daysDurationWheel.getValue());
-        int hours = Integer.parseInt(hourWheel.getValue());
-        int minutes = Integer.parseInt(minutesWheel.getValue());
-        int durationS = days * 24 * 60 * 60 + hours * 60 * 60 + minutes * 60;
-        return durationS;
+        int hours = Integer.parseInt(hoursDurationWheel.getValue());
+        int minutes = Integer.parseInt(minutesDurationWheel.getValue());
+        return
+                days * 24 * 60 * 60 + // days to seconds
+                hours * 60 * 60 + // hours to seconds
+                minutes * 60; // minutes to seconds
     }
 
     String getTimeString(){
@@ -151,7 +162,9 @@ public class Wheels {
         for (WheelType wheelType : wheels) {
             Wheel wheel = getWheel(wheelType);
             pickerWrapper.addPicker(wheel.picker.getView());
-            pickerWrapper.addLabel(wheel.label);
+            if (wheel instanceof DurationWheel durationWheel) {
+                pickerWrapper.addLabel(durationWheel.label);
+            }
         }
     }
 
@@ -180,7 +193,7 @@ public class Wheels {
     }
 
     private List<Wheel> getAll(){
-        return new ArrayList<>(Arrays.asList(yearWheel, monthWheel, dateWheel, dayWheel, daysDurationWheel, hourWheel, minutesWheel, ampmWheel));
+        return new ArrayList<>(Arrays.asList(yearWheel, monthWheel, dateWheel, dayWheel, hourWheel, minutesWheel, ampmWheel, daysDurationWheel, hoursDurationWheel, minutesDurationWheel));
     }
 
     private String getDateFormatPattern(){
@@ -202,8 +215,10 @@ public class Wheels {
 
     private HashMap<WheelType, Wheel> getWheelPerType(){
         return new HashMap<WheelType, Wheel>() {{
+            put(WheelType.DURATION_DAYS, daysDurationWheel);
+            put(WheelType.DURATIONS_HOURS, hoursDurationWheel);
+            put(WheelType.DURATION_MINUTES, minutesDurationWheel);
             put(WheelType.DAY, dayWheel);
-            put(WheelType.DAYS_DURATION, daysDurationWheel);
             put(WheelType.YEAR, yearWheel);
             put(WheelType.MONTH,monthWheel);
             put(WheelType.DATE, dateWheel);

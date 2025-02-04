@@ -48,7 +48,6 @@ public class Emitter {
     }
 
     public static void onDurationChange(int durationS, String id, View view) {
-        // todo: confirm format for duration with JS side!
         WritableMap event = Arguments.createMap();
         event.putString("timestamp", durationS + "");
         event.putString("id", id);
@@ -61,7 +60,6 @@ public class Emitter {
     }
 
     public static void onConfirm(String date, String id) {
-        // todo: confirm format for duration with JS side!
         WritableMap event = Arguments.createMap();
         event.putString("date", date);
         event.putString("id", id);

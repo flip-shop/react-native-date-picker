@@ -8,6 +8,7 @@ import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
 import com.henninghall.date_picker.wheelFunctions.Refresh;
 import com.henninghall.date_picker.wheelFunctions.SetDate;
 import com.henninghall.date_picker.wheelFunctions.SetDividerColor;
+import com.henninghall.date_picker.wheelFunctions.SetDuration;
 import com.henninghall.date_picker.wheelFunctions.TextColor;
 import com.henninghall.date_picker.wheelFunctions.UpdateVisibility;
 import com.henninghall.date_picker.wheels.Wheel;
@@ -65,6 +66,10 @@ public class UIManager {
     void animateToDate(Calendar date) {
         wheels.applyOnInVisible(new SetDate(date));
         wheels.applyOnVisible(new AnimateToDate(date));
+    }
+
+    void animateToDuration(int durationS) {
+        wheels.applyOnVisible(new SetDuration(durationS, true));
     }
 
     private void addOnChangeListener(){

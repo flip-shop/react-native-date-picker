@@ -13,8 +13,8 @@ import java.util.Calendar;
 
 public class MinutesWheel extends Wheel {
 
-    public MinutesWheel(Picker picker, Label label, State id) {
-        super(picker, label, id);
+    public MinutesWheel(Picker picker, State id) {
+        super(picker, id);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MinutesWheel extends Wheel {
 
     @Override
     public boolean labelVisible() {
-        return state.getMode() == Mode.duration;
+        return false;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.henninghall.date_picker.State;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -33,19 +35,9 @@ public abstract class Wheel {
         return value;
     }
 
-    private ArrayList<String> values = new ArrayList<>();
+    protected ArrayList<String> values = new ArrayList<>();
     public Picker picker;
-    @Nullable public Label label;
     public SimpleDateFormat format;
-
-    public Wheel(Picker picker, @Nullable Label label, State state) {
-        this.state = state;
-        this.picker = picker;
-        this.label = label;
-        this.format = new SimpleDateFormat(getFormatPattern(), state.getLocale());
-        picker.setTextAlign(getTextAlign());
-        picker.setWrapSelectorWheel(wrapSelectorWheel());
-    }
 
     public Wheel(Picker picker, State state) {
         this.state = state;
@@ -115,7 +107,7 @@ public abstract class Wheel {
         return displayValues.toArray(new String[0]);
     }
 
-    private void init(){
+    protected void init(){
         picker.setMinValue(0);
         picker.setMaxValue(0);
         values = getValues();
@@ -126,11 +118,6 @@ public abstract class Wheel {
     public void updateVisibility(){
         int visibility = visible() ? View.VISIBLE: View.GONE;
         picker.setVisibility(visibility);
-
-        if (label != null) { // Just date/hour/minute wheel has the label
-            int labelVisibility = labelVisible() ? View.VISIBLE : View.GONE;
-            label.setVisibility(labelVisibility);
-        }
     }
 
     private SimpleDateFormat getFormat(Locale locale) {
@@ -147,5 +134,9 @@ public abstract class Wheel {
 
     public void setDividerColor(String color) {
         picker.setDividerColor(color);
+    }
+
+    public void setDividerVisibility(boolean visible) {
+        picker.setDividerVisibility(visible);
     }
 }

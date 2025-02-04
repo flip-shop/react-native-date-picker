@@ -15,8 +15,8 @@ public class HourWheel extends Wheel {
 
     private final HourDisplayBugWorkaround hourDisplayAdjustment;
 
-    public HourWheel(Picker picker, Label label, State id) {
-        super(picker, label, id);
+    public HourWheel(Picker picker, State id) {
+        super(picker, id);
         this.hourDisplayAdjustment = new HourDisplayBugWorkaround(state);
     }
 
@@ -49,7 +49,7 @@ public class HourWheel extends Wheel {
 
     @Override
     public boolean labelVisible() {
-        return state.getMode() == Mode.duration;
+        return false;
     }
 
     @Override

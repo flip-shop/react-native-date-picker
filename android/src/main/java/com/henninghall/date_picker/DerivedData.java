@@ -23,9 +23,9 @@ public class DerivedData {
         Mode mode = state.getMode();
         switch (mode){
             case duration:{
-                visibleWheels.add(WheelType.DAYS_DURATION);
-                visibleWheels.add(WheelType.HOUR);
-                visibleWheels.add(WheelType.MINUTE);
+                visibleWheels.add(WheelType.DURATION_DAYS);
+                visibleWheels.add(WheelType.DURATIONS_HOURS);
+                visibleWheels.add(WheelType.DURATION_MINUTES);
                 break;
             }
             case datetime: {
@@ -67,15 +67,15 @@ public class DerivedData {
         String dateTimePattern = dateTimePatternOld.replaceAll("\\('(.+?)'\\)","\\${$1}")
                 .replaceAll("'.+?'","")
                 .replaceAll("\\$\\{(.+?)\\}","('$1')");
-        ArrayList<WheelType> unorderedTypes = new ArrayList(Arrays.asList(WheelType.values()));
-        ArrayList<WheelType> orderedWheels = new ArrayList<>();
+        ArrayList<WheelType> unorderedTypes = new ArrayList<>(Arrays.asList(WheelType.values()));
 
-        // Always put day and days-durations wheel first
-        unorderedTypes.remove(WheelType.DAY);
-        orderedWheels.add(WheelType.DAY);
-
-        unorderedTypes.remove(WheelType.DAYS_DURATION);
-        orderedWheels.add(WheelType.DAYS_DURATION);
+        // Always put duration-related wheels and day wheel first
+        ArrayList<WheelType> orderedWheels = new ArrayList<>(Arrays.asList(
+                WheelType.DURATION_DAYS, WheelType.DURATIONS_HOURS, WheelType.DURATION_MINUTES, WheelType.DAY
+        ));
+        unorderedTypes.removeAll(
+                Arrays.asList(WheelType.DURATION_DAYS, WheelType.DURATIONS_HOURS, WheelType.DURATION_MINUTES, WheelType.DAY)
+        );
 
         for (char c: dateTimePattern.toCharArray()){
             try {

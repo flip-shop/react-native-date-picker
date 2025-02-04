@@ -42,12 +42,21 @@
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/durationDays"
+            android:theme="@style/DatePickerTheme"
+            style="@style/android_native_medium"
+            android:tag="durationDays"
+            android:contentDescription="@string/days_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
         <com.henninghall.date_picker.Label
             android:id="@+id/labelDate"
             android:text="@string/label_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:theme="@style/DatePickerTheme"
+            style="@style/DatePickerTheme"
             android:tag="labelDate" />
 
 
@@ -78,12 +87,21 @@
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/durationHours"
+            android:theme="@style/DatePickerTheme"
+            style="@style/android_native_medium"
+            android:tag="durationHours"
+            android:contentDescription="@string/hour_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
         <com.henninghall.date_picker.Label
             android:id="@+id/labelHour"
             android:text="@string/label_hour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:theme="@style/DatePickerTheme"
+            style="@style/DatePickerTheme"
             android:tag="labelHour" />
 
         <com.henninghall.date_picker.pickers.AndroidNative
@@ -95,12 +113,21 @@
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/durationMinutes"
+            android:theme="@style/DatePickerTheme"
+            style="@style/android_native_medium"
+            android:tag="durationMinutes"
+            android:contentDescription="@string/minutes_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
         <com.henninghall.date_picker.Label
             android:id="@+id/labelMinutes"
             android:text="@string/label_minute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:theme="@style/DatePickerTheme"
+            style="@style/DatePickerTheme"
             android:tag="labelMinutes" />
 
         <com.henninghall.date_picker.pickers.AndroidNative

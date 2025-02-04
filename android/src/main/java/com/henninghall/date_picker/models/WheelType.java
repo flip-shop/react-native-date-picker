@@ -1,5 +1,5 @@
 package com.henninghall.date_picker.models;
 
 public enum WheelType {
-    DAY, DAYS_DURATION, DATE, MONTH, YEAR, HOUR, MINUTE, AM_PM
+    DAY, DATE, MONTH, YEAR, HOUR, MINUTE, AM_PM, DURATION_DAYS, DURATIONS_HOURS, DURATION_MINUTES
 }
