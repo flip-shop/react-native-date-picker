@@ -16,7 +16,7 @@ type StringEvent = {
 
 export interface NativeProps extends ViewProps {
   locale?: string
-  date: Double
+  date?: Double
   maximumDate?: Double
   minimumDate?: Double
   minuteInterval?: Int32

@@ -16,15 +16,25 @@ export const DatePickerAndroid = React.memo((props) => {
 
   const onChange = useCallback(
     /**
-     * @typedef {{date: string, id: string, dateString: string}} Data
+     * @typedef {{date: string, id: string, dateString: string, timestamp: string }} Data
      * @param {{ nativeEvent: Data } | Data & { nativeEvent: undefined }} e
      */
     (e) => {
-      const { date, id, dateString } = e.nativeEvent ?? e
+      const { date, id, dateString , timestamp} = e.nativeEvent ?? e
       const newArch = id !== null
       if (newArch && id !== thisId) return
-      const jsDate = fromIsoWithTimeZoneOffset(date)
-      if (props.onDateChange) props.onDateChange(jsDate)
+
+      if(date){
+        const jsDate = fromIsoWithTimeZoneOffset(date)
+        if (props.onDateChange) props.onDateChange(jsDate)
+      }
+
+      if(timestamp){
+        if (props.onDateChange)  {
+          props.onDateChange(new Date(timestamp))
+        }
+      }
+
       if (props.onDateStringChange) props.onDateStringChange(dateString)
     },
     [props, thisId]
