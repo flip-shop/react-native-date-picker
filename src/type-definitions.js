@@ -6,7 +6,7 @@
  * {import("./fabric/RNDatePickerNativeComponent").NativeProps} NativeProps
  * @typedef {{
  * timeZoneOffsetInMinutes: string,
- * date: string | number | undefined,
+ * date?: string | number | undefined,
  * id?: string ,
  * minimumDate?: string | number | undefined,
  * maximumDate?: string | number | undefined,
