@@ -11,6 +11,11 @@ export const DatePickerIOS = (props) => {
     /** @param {{ nativeEvent: { timestamp: string } }} event */
     (event) => {
       const nativeTimeStamp = event.nativeEvent.timestamp
+
+      if(props.mode === 'duration') {
+        props.onDateChange(nativeTimeStamp)
+      }
+
       if (props.onDateChange) props.onDateChange(new Date(nativeTimeStamp))
     },
     [props]
@@ -37,6 +42,8 @@ export const DatePickerIOS = (props) => {
     locale: props.locale ? props.locale : undefined,
     maximumDate: props.maximumDate ? props.maximumDate.getTime() : undefined,
     minimumDate: props.minimumDate ? props.minimumDate.getTime() : undefined,
+    minimumDuration: props.minimumDuration || 60,
+    maximumDuration: props.maximumDuration ? props.maximumDuration : undefined,
     theme: props.theme ? props.theme : 'auto',
   }
 

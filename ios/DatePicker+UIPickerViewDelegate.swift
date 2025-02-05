@@ -11,9 +11,11 @@ extension DatePicker: UIPickerViewDelegate {
     public func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         guard let component = dataManager.collections[safe: component]?.component else { return 0 }
         switch component {
+        case _ where pickerMode == .duration:
+            return Constants.durationRowWidth
         case .year:
             return pickerView.bounds.size.width * 0.25
-        case .month, .day where datePickerMode == .dateAndTime:
+        case .month, .day where pickerMode == .dateAndTime:
             return pickerView.bounds.size.width * 0.35
         case .hour, .minute, .nanosecond, .day:
             return pickerView.bounds.size.width * 0.1
@@ -41,7 +43,6 @@ extension DatePicker: UIPickerViewDelegate {
             label.font = UIFont.systemFont(ofSize: 20)
             label.backgroundColor = .clear
         }
-
         label.text = dataManager.getValueInComponentForRow(component: component, row: row)
 
         if !isPickerScrolling, isScrolling() { isPickerScrolling = true }
@@ -51,6 +52,10 @@ extension DatePicker: UIPickerViewDelegate {
 
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if isPickerScrolling { isPickerScrolling = false }
+        guard pickerMode != .duration else {
+            handleDurationSelection()
+            return
+        }
         var newComponents = DateComponents()
         dataManager.collections.enumerated().map { index, collection in
             var value: Int? = nil
@@ -75,8 +80,8 @@ extension DatePicker: UIPickerViewDelegate {
         }
 
         let oldComponents = calendar.dateComponents([.day, .year, .month], from: selectedDate)
-        switch datePickerMode {
-        case .time, .countDownTimer:
+        switch pickerMode {
+        case .time:
             newComponents.day = oldComponents.day
             newComponents.year = oldComponents.year
             newComponents.month = oldComponents.month
@@ -87,10 +92,10 @@ extension DatePicker: UIPickerViewDelegate {
 
         guard var date = calendar.date(from: adjustDateComponents(newComponents)) else { return }
 
-        if let minimumDate, date < minimumDate, datePickerMode == .date {
+        if let minimumDate, date < minimumDate, pickerMode == .date {
             date = minimumDate
         }
-        if let maximumDate, date > maximumDate, datePickerMode == .date {
+        if let maximumDate, date > maximumDate, pickerMode == .date {
             date = maximumDate
         }
 
@@ -100,7 +105,6 @@ extension DatePicker: UIPickerViewDelegate {
     }
 
     private func adjustDateComponents(_ components: DateComponents) -> DateComponents {
-        guard datePickerMode == .date else { return components }
         var newComponents = components
         newComponents.day = 1
 
@@ -123,5 +127,38 @@ extension DatePicker: UIPickerViewDelegate {
             }
         }
         return newComponents
+    }
+
+    private func handleDurationSelection() {
+        var timeInterval = 0
+
+        for (index, collection) in dataManager.collections.enumerated() {
+            if let value = dataManager.getValueInComponentForRow(
+                component: index,
+                row: selectedRow(inComponent: index)
+            ),
+                let intValue = Int(value)
+            {
+                let multipleConstant: Int = switch collection.component {
+                case .day: Constants.secsInDay
+                case .hour: Constants.secsInHour
+                case .minute: Constants.secsInMinute
+                default: 0
+                }
+
+                timeInterval += multipleConstant * intValue
+            }
+        }
+
+        if let minDuration, timeInterval < minDuration {
+            timeInterval = minDuration
+            setDuration(timeInterval)
+        }
+        if let maxDuration, timeInterval > maxDuration {
+            timeInterval = maxDuration
+            setDuration(timeInterval)
+        }
+
+        onChange?(["timestamp": timeInterval])
     }
 }

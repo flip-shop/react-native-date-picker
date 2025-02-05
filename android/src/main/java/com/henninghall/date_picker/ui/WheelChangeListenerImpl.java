@@ -1,9 +1,11 @@
 package com.henninghall.date_picker.ui;
 
+import android.util.Log;
 import android.view.View;
 
 import com.henninghall.date_picker.Emitter;
 import com.henninghall.date_picker.State;
+import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.wheels.Wheel;
 
 import java.text.ParseException;
@@ -39,8 +41,14 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
     @Override
     public void onChange(Wheel picker) {
         if(wheels.hasSpinningWheel()) return;
+        switch (state.getMode()) {
+            case duration -> onDurationChange();
+            default -> onDateChange();
+        }
+    }
 
-        if(!dateExists()){
+    private void onDateChange() {
+        if(!dateExists()) {
             Calendar closestExistingDate = getClosestExistingDateInPast();
             if(closestExistingDate != null) {
                 uiManager.animateToDate(closestExistingDate);
@@ -49,6 +57,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
         }
 
         Calendar selectedDate = getSelectedDate();
+
         if(selectedDate == null) return;
 
         Calendar minDate = state.getMinimumDate();
@@ -67,6 +76,28 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
 
         uiManager.updateLastSelectedDate(selectedDate);
         Emitter.onDateChange(selectedDate, displayData, state.getId(), rootView);
+    }
+
+    private void onDurationChange() {
+
+        int durationS = wheels.getDurationS();
+
+        Integer minDuration = state.getMinimumDurationS();
+
+        if (minDuration != null && durationS < minDuration) {
+            uiManager.animateToDuration(minDuration);
+            return;
+        }
+
+        Integer maxDuration = state.getMaximumDurationS();
+
+        if (maxDuration != null && durationS > maxDuration) {
+            uiManager.animateToDuration(maxDuration);
+            return;
+        }
+
+        uiManager.updateLastSelectedDuration(durationS);
+        Emitter.onDurationChange(durationS, state.getId(), rootView);
     }
 
     @Override

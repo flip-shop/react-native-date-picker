@@ -18,6 +18,13 @@
 		3927AA582C1732ED00671DAD /* ComponentInfinityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA572C1732ED00671DAD /* ComponentInfinityDataSource.swift */; };
 		3927AA5A2C17335200671DAD /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA592C17335200671DAD /* DataManager.swift */; };
 		39975E572C17B81600B23594 /* DatePicker+DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39975E562C17B81600B23594 /* DatePicker+DataManager.swift */; };
+		39C7EDD82D4D113100E4D4C7 /* CGSize+infinitySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDD42D4D113100E4D4C7 /* CGSize+infinitySize.swift */; };
+		39C7EDD92D4D113100E4D4C7 /* String+boundingRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDD62D4D113100E4D4C7 /* String+boundingRect.swift */; };
+		39C7EDDA2D4D113100E4D4C7 /* UILabel+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDD72D4D113100E4D4C7 /* UILabel+utils.swift */; };
+		39C7EDDB2D4D113100E4D4C7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDD52D4D113100E4D4C7 /* Constants.swift */; };
+		39C7EDDC2D4D113100E4D4C7 /* CGFloat+roundToNearestPixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDD32D4D113100E4D4C7 /* CGFloat+roundToNearestPixel.swift */; };
+		39C7EDDE2D4D114200E4D4C7 /* DatePicker+unitLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDDD2D4D114200E4D4C7 /* DatePicker+unitLabels.swift */; };
+		39C7EDE02D4D114F00E4D4C7 /* DatePickerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDDF2D4D114F00E4D4C7 /* DatePickerMode.swift */; };
 		39F5BD542C2AC3A100E12407 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5BD532C2AC3A100E12407 /* DataSource.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +56,13 @@
 		3927AA572C1732ED00671DAD /* ComponentInfinityDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentInfinityDataSource.swift; sourceTree = "<group>"; };
 		3927AA592C17335200671DAD /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		39975E562C17B81600B23594 /* DatePicker+DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatePicker+DataManager.swift"; sourceTree = "<group>"; };
+		39C7EDD32D4D113100E4D4C7 /* CGFloat+roundToNearestPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+roundToNearestPixel.swift"; sourceTree = "<group>"; };
+		39C7EDD42D4D113100E4D4C7 /* CGSize+infinitySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+infinitySize.swift"; sourceTree = "<group>"; };
+		39C7EDD52D4D113100E4D4C7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		39C7EDD62D4D113100E4D4C7 /* String+boundingRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+boundingRect.swift"; sourceTree = "<group>"; };
+		39C7EDD72D4D113100E4D4C7 /* UILabel+utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+utils.swift"; sourceTree = "<group>"; };
+		39C7EDDD2D4D114200E4D4C7 /* DatePicker+unitLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatePicker+unitLabels.swift"; sourceTree = "<group>"; };
+		39C7EDDF2D4D114F00E4D4C7 /* DatePickerMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerMode.swift; sourceTree = "<group>"; };
 		39F5BD532C2AC3A100E12407 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,9 +84,11 @@
 				3927AA482C1725E100671DAD /* DataSources */,
 				3927AA592C17335200671DAD /* DataManager.swift */,
 				3927AA3E2C17258C00671DAD /* DatePicker.swift */,
+				39C7EDDF2D4D114F00E4D4C7 /* DatePickerMode.swift */,
 				39975E562C17B81600B23594 /* DatePicker+DataManager.swift */,
 				3927AA3C2C17258C00671DAD /* DatePicker+UIPickerViewDataSource.swift */,
 				3927AA3B2C17258C00671DAD /* DatePicker+UIPickerViewDelegate.swift */,
+				39C7EDDD2D4D114200E4D4C7 /* DatePicker+unitLabels.swift */,
 				3927AA3A2C17258C00671DAD /* RNDatePicker.h */,
 				3927AA392C17258C00671DAD /* RNDatePicker.mm */,
 				3927AA3F2C17258C00671DAD /* RNDatePickerManager.h */,
@@ -103,6 +119,11 @@
 		3927AA492C17261000671DAD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				39C7EDD32D4D113100E4D4C7 /* CGFloat+roundToNearestPixel.swift */,
+				39C7EDD42D4D113100E4D4C7 /* CGSize+infinitySize.swift */,
+				39C7EDD52D4D113100E4D4C7 /* Constants.swift */,
+				39C7EDD62D4D113100E4D4C7 /* String+boundingRect.swift */,
+				39C7EDD72D4D113100E4D4C7 /* UILabel+utils.swift */,
 				3927AA4A2C17264600671DAD /* Array+subscript.swift */,
 				3927AA402C17258C00671DAD /* UIView+isScrolling.swift */,
 			);
@@ -170,14 +191,21 @@
 			files = (
 				3927AA5A2C17335200671DAD /* DataManager.swift in Sources */,
 				3927AA4B2C17264600671DAD /* Array+subscript.swift in Sources */,
+				39C7EDDE2D4D114200E4D4C7 /* DatePicker+unitLabels.swift in Sources */,
 				3927AA562C17329200671DAD /* ComponentDataSource.swift in Sources */,
 				3927AA452C17258C00671DAD /* RNDatePickerManager.mm in Sources */,
 				39975E572C17B81600B23594 /* DatePicker+DataManager.swift in Sources */,
 				3927AA472C17258C00671DAD /* UIView+isScrolling.swift in Sources */,
 				39F5BD542C2AC3A100E12407 /* DataSource.swift in Sources */,
 				3927AA582C1732ED00671DAD /* ComponentInfinityDataSource.swift in Sources */,
+				39C7EDD82D4D113100E4D4C7 /* CGSize+infinitySize.swift in Sources */,
+				39C7EDD92D4D113100E4D4C7 /* String+boundingRect.swift in Sources */,
+				39C7EDDA2D4D113100E4D4C7 /* UILabel+utils.swift in Sources */,
+				39C7EDDB2D4D113100E4D4C7 /* Constants.swift in Sources */,
+				39C7EDDC2D4D113100E4D4C7 /* CGFloat+roundToNearestPixel.swift in Sources */,
 				3927AA422C17258C00671DAD /* RNDatePicker.mm in Sources */,
 				3927AA432C17258C00671DAD /* DatePicker+UIPickerViewDelegate.swift in Sources */,
+				39C7EDE02D4D114F00E4D4C7 /* DatePickerMode.swift in Sources */,
 				3927AA442C17258C00671DAD /* DatePicker+UIPickerViewDataSource.swift in Sources */,
 				3927AA462C17258C00671DAD /* DatePicker.swift in Sources */,
 			);

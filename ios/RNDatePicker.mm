@@ -153,14 +153,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     
     // mode
     if (oldViewProps.mode != newViewProps.mode) {
-        UIDatePickerMode mode = UIDatePickerModeDate;
-        if (newViewProps.mode == RNDatePickerMode::Time) {
-            mode = UIDatePickerModeTime;
-        } else if (newViewProps.mode == RNDatePickerMode::Date) {
-            mode = UIDatePickerModeDate;
-        } else if (newViewProps.mode == RNDatePickerMode::Datetime) {
-            mode = UIDatePickerModeDateAndTime;
-        }
+        NSString *mode = RCTNSStringFromString(newViewProps.mode);
         [_picker setDatePickerMode:mode];
     }
     
@@ -175,6 +168,16 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         NSString *textColor = RCTNSStringFromString(newViewProps.textColor);
         [_picker setTextColorProp:textColor];
     }
+
+    // minimumDuration
+    if (oldViewProps.minimumDuration != newViewProps.minimumDuration) {
+        [_picker setMinimumDuration:newViewProps.minimumDuration];
+    }
+
+    // maximumDuration
+    if (oldViewProps.maximumDuration != newViewProps.maximumDuration) {
+        [_picker setMaximumDuration:newViewProps.maximumDuration];
+    }
     
     [super updateProps:props oldProps:oldProps];
 }
@@ -186,7 +189,7 @@ Class<RCTComponentViewProtocol> RNDatePickerCls(void)
 }
 
 #else
-- (void)setDatePickerMode:(UIDatePickerMode)datePickerMode
+- (void)setDatePickerMode:(NSString*)datePickerMode
 {
   [_picker setDatePickerMode:datePickerMode];
   [_picker setMinuteInterval:_reactMinuteInterval];
@@ -226,6 +229,16 @@ Class<RCTComponentViewProtocol> RNDatePickerCls(void)
 - (void)setDate:(NSDate*)date
 {
     [_picker setDate:date];
+}
+
+- (void)setMinimumDuration:(NSInteger)duration
+{
+  [_picker setMinimumDuration:duration];
+}
+
+- (void)setMaximumDuration:(NSInteger)duration
+{
+  [_picker setMaximumDuration:duration];
 }
 
 #endif

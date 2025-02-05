@@ -1,5 +1,7 @@
 package com.henninghall.date_picker;
 
+import androidx.annotation.Nullable;
+
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Is24HourSource;
 import com.henninghall.date_picker.models.Mode;
@@ -10,7 +12,9 @@ import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
+import com.henninghall.date_picker.props.MaximumDurationProp;
 import com.henninghall.date_picker.props.MinimumDateProp;
+import com.henninghall.date_picker.props.MinimumDurationProp;
 import com.henninghall.date_picker.props.MinuteIntervalProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.Prop;
@@ -26,6 +30,8 @@ import java.util.TimeZone;
 public class State {
 
     private Calendar lastSelectedDate = null;
+
+    private Integer lastSelectedDuration = null; // for duration mode only
     private final DateProp dateProp = new DateProp();
     private final ModeProp modeProp = new ModeProp();
     private final LocaleProp localeProp = new LocaleProp();
@@ -39,6 +45,8 @@ public class State {
     private final IdProp idProp = new IdProp();
 
     private final DividerColorProp dividerColorProp = new DividerColorProp();
+    private final MinimumDurationProp minimumDurationProp = new MinimumDurationProp();
+    private final MaximumDurationProp maximumDurationProp = new MaximumDurationProp();
 
     private final HashMap props = new HashMap<String, Prop>() {{
         put(DateProp.name, dateProp);
@@ -53,6 +61,8 @@ public class State {
         put(Is24hourSourceProp.name, is24hourSourceProp);
         put(IdProp.name, idProp);
         put(DividerColorProp.name, dividerColorProp);
+        put(MinimumDurationProp.name, minimumDurationProp);
+        put(MaximumDurationProp.name, maximumDurationProp);
     }};
     public DerivedData derived;
 
@@ -163,7 +173,25 @@ public class State {
         lastSelectedDate = date;
     }
 
+    @Nullable public Integer getLastSelectedDuration() {
+        return lastSelectedDuration;
+    }
+
+    public void setLastSelectedDuration(int lastSelectedDuration) {
+        this.lastSelectedDuration = lastSelectedDuration;
+    }
+
     public String getDividerColor() {
         return dividerColorProp.getValue();
+    }
+
+    public Integer getMinimumDurationS() {
+        Integer min = minimumDurationProp.getValue();
+        return (min != null) ? Math.max(0, min) : null; // ignore negative values
+    }
+
+    public Integer getMaximumDurationS() {
+        Integer max = maximumDurationProp.getValue();
+        return (max != null) ? Math.max(0, max) : null; // ignore negative values
     }
 }
