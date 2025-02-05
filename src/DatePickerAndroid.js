@@ -31,7 +31,7 @@ export const DatePickerAndroid = React.memo((props) => {
 
       if(timestamp){
         if (props.onDateChange)  {
-          props.onDateChange(new Date(timestamp))
+          props.onDateChange(timestamp)
         }
       }
 
