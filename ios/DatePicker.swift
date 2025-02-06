@@ -80,6 +80,7 @@ import UIKit
         minDuration = roundUpToNearestMinute(duration)
         guard pickerMode == .duration else { return }
         dataManager = createDataManager()
+        setDuration(duration)
     }
 
     public func setMaximumDuration(_ duration: Int) {
