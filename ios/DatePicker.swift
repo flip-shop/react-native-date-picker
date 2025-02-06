@@ -105,6 +105,8 @@ import UIKit
         dataManager = createDataManager()
         guard pickerMode == .duration else { return }
         configureUnitLabels()
+        guard let minDuration else { return }
+        setDuration(minDuration)
     }
 
     public func setTimeZoneOffsetInMinutes(_ timeZoneOffsetInMinutes: String) {
