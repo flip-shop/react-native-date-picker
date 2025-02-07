@@ -137,7 +137,11 @@ public class State {
     }
 
     private Calendar getDate() {
-        return Utils.isoToCalendar(getIsoDate(), getTimeZone());
+        Calendar calendar = Utils.isoToCalendar(getIsoDate(), getTimeZone());
+        if (calendar == null) { // default fallback to minDate prop
+            calendar = getMinimumDate();
+        }
+        return calendar;
     }
 
     // The date the picker is suppose to display.
