@@ -6,6 +6,7 @@ import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Is24HourSource;
 import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.props.DividerColorProp;
+import com.henninghall.date_picker.props.DurationProp;
 import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.IdProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
@@ -33,6 +34,7 @@ public class State {
 
     private Integer lastSelectedDuration = null; // for duration mode only
     private final DateProp dateProp = new DateProp();
+    private final DurationProp durationProp = new DurationProp();
     private final ModeProp modeProp = new ModeProp();
     private final LocaleProp localeProp = new LocaleProp();
     private final TextColorProp textColorProp = new TextColorProp();
@@ -50,6 +52,7 @@ public class State {
 
     private final HashMap props = new HashMap<String, Prop>() {{
         put(DateProp.name, dateProp);
+        put(DurationProp.name, durationProp);
         put(ModeProp.name, modeProp);
         put(LocaleProp.name, localeProp);
         put(TextColorProp.name, textColorProp);
@@ -134,6 +137,10 @@ public class State {
 
     public String getIsoDate() {
         return (String) dateProp.getValue();
+    }
+
+    public String getDuration() {
+        return durationProp.getValue();
     }
 
     private Calendar getDate() {
