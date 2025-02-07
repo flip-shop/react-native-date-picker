@@ -23,6 +23,7 @@ export interface NativeProps extends ViewProps {
   mode?: WithDefault<'date' | 'time' | 'datetime' | 'duration', 'datetime'>
   minimumDuration?: WithDefault<Int32, 60>
   maximumDuration?: Int32
+  duration?: Int32
   onChange: BubblingEventHandler<DateEvent>
   onStateChange: BubblingEventHandler<StringEvent>
 
