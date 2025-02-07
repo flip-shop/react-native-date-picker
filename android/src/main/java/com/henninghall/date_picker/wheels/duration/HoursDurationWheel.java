@@ -1,7 +1,5 @@
 package com.henninghall.date_picker.wheels.duration;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -44,9 +42,9 @@ public class HoursDurationWheel extends DurationWheel {
     @Nullable
     @Override
     Integer getInitialValue() {
-        String durationProp = state.getDuration();
+        Integer durationProp = state.getDuration();
         if (durationProp != null) {
-            return secondsToHours(Integer.parseInt(durationProp)) % 24; // hours carried-over from previous full days, if any
+            return secondsToHours(durationProp) % 24; // hours carried-over from previous full days, if any
         }
         return null;
     }
