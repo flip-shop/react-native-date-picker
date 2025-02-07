@@ -11,7 +11,6 @@ extension DatePicker {
         showUnitLabels()
     }
 
-
     func makeUnitLabel() -> UILabel {
         let label = UILabel()
         label.textAlignment = .right
@@ -71,11 +70,10 @@ extension DatePicker {
 
     private func unitLabelOriginX(forComponent component: Int?) -> CGFloat {
         guard let component else { return 0 }
-        let columnLabel = view(forRow: 0, forComponent: component)
-        let columnLabelHalfWidth = (columnLabel?.frame.width ?? 0) / 2
+
         let rowWidth: CGFloat = rowSize(forComponent: component).width
         let rowHalfWidth: CGFloat = rowWidth / 2
-        let unitLabelMargin: CGFloat = rowHalfWidth + columnLabelHalfWidth + Constants.unitLabelSpacing
+        let unitLabelMargin: CGFloat = rowHalfWidth + Constants.unitLabelSpacing
         let originX = frame.minX + unitLabelMargin + CGFloat(component) * (rowWidth + Constants.columnSpacing)
         return originX.roundedToNearestPixel(roundingRule: .up)
     }
