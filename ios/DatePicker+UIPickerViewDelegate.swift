@@ -158,7 +158,7 @@ extension DatePicker: UIPickerViewDelegate {
             timeInterval = maxDuration
             setDuration(timeInterval)
         }
-
+        selectedDuration = timeInterval
         onChange?(["timestamp": timeInterval])
     }
 }

@@ -3,6 +3,7 @@ package com.henninghall.date_picker.wheels.duration;
 import android.graphics.Paint;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.henninghall.date_picker.Label;
 import com.henninghall.date_picker.State;
@@ -43,6 +44,16 @@ public class DaysDurationWheel extends DurationWheel {
         }
         int propsMin = secondsToDays(state.getMinimumDurationS());
         return Math.max(defaultMin, propsMin); // normalize
+    }
+
+    @Nullable
+    @Override
+    Integer getInitialValue() {
+        String durationProp = state.getDuration();
+        if (durationProp != null) {
+            return secondsToDays(Integer.parseInt(durationProp));
+        }
+        return null;
     }
 
     @Override

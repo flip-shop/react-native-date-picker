@@ -44,6 +44,7 @@ export const DatePickerIOS = (props) => {
     minimumDate: props.minimumDate ? props.minimumDate.getTime() : undefined,
     minimumDuration: props.minimumDuration || 60,
     maximumDuration: props.maximumDuration ? props.maximumDuration : undefined,
+    duration: props.duration ? props.duration : undefined,
     theme: props.theme ? props.theme : 'auto',
   }
 

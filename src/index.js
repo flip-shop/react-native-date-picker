@@ -27,6 +27,7 @@ const DatePickerWrapper = (props) => {
       mode={props.mode ? props.mode : 'datetime'}
       minimumDuration={props.minimumDuration}
       maximumDuration={props.maximumDuration}
+      duration={props.duration}
       timeZoneOffsetInMinutes={
         props.timeZoneOffsetInMinutes == null
           ? ''

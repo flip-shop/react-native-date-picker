@@ -12,6 +12,7 @@
  * maximumDate?: string | number | undefined,
  * minimumDuration?: number | undefined,
  * maximumDuration?: number | undefined,
+ * duration?: number | undefined,
  * timezoneOffsetInMinutes?: string | undefined,
  * style: import('react-native').StyleProp<import('react-native').ViewStyle>,
  * onChange: (e: *) => void,

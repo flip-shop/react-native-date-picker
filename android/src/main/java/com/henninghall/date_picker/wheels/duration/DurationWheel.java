@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.henninghall.date_picker.Label;
 import com.henninghall.date_picker.State;
@@ -26,6 +27,8 @@ public abstract class DurationWheel extends Wheel {
 
     abstract int getMaxValue();
     abstract int getMinValue();
+
+    abstract @Nullable Integer getInitialValue();
     abstract public void setDuration(int durationS, boolean forceAnimation);
 
     @NonNull public Label label;
@@ -42,7 +45,9 @@ public abstract class DurationWheel extends Wheel {
     protected void init() {
         if (initialized) return; // avoid multiple initializations
         super.init();
-        setValue(getMinValue(),false);
+        Integer initialValue = getInitialValue();
+        int targetInitialValue = initialValue != null ? initialValue : getMinValue(); // in case initialValue prop is not set (`duration`), defaults to `minimumDuration` or 0 if `minimumDuration' also null.
+        setValue(targetInitialValue,false);
         initialized = true;
     }
 

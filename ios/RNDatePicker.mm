@@ -178,6 +178,11 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     if (oldViewProps.maximumDuration != newViewProps.maximumDuration) {
         [_picker setMaximumDuration:newViewProps.maximumDuration];
     }
+
+    // duration
+    if (oldViewProps.duration != newViewProps.duration) {
+        [_picker setDuration:newViewProps.duration];
+    }
     
     [super updateProps:props oldProps:oldProps];
 }
@@ -239,6 +244,11 @@ Class<RCTComponentViewProtocol> RNDatePickerCls(void)
 - (void)setMaximumDuration:(NSInteger)duration
 {
   [_picker setMaximumDuration:duration];
+}
+
+- (void)setDuration:(NSInteger)duration
+{
+  [_picker setDuration:duration];
 }
 
 #endif

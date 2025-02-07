@@ -36,6 +36,7 @@ import UIKit
         }
     }
 
+    var selectedDuration: Int?
     private(set) var pickerMode: DatePickerMode = .date
     private(set) var minDuration: Int?
     private(set) var maxDuration: Int?
@@ -80,7 +81,7 @@ import UIKit
         minDuration = roundUpToNearestMinute(duration)
         guard pickerMode == .duration else { return }
         dataManager = createDataManager()
-        setDuration(duration)
+        setDuration(selectedDuration ?? minDuration ?? 0)
     }
 
     public func setMaximumDuration(_ duration: Int) {
@@ -105,8 +106,7 @@ import UIKit
         dataManager = createDataManager()
         guard pickerMode == .duration else { return }
         configureUnitLabels()
-        guard let minDuration else { return }
-        setDuration(minDuration)
+        setDuration(selectedDuration ?? minDuration ?? 0)
     }
 
     public func setTimeZoneOffsetInMinutes(_ timeZoneOffsetInMinutes: String) {
@@ -119,9 +119,10 @@ import UIKit
     }
 
     public func setDuration(_ duration: Int) {
-        guard pickerMode == .duration else { return }
-        let days = duration / Constants.secsInDay
-        let remainderAfterDays = duration % Constants.secsInDay
+        selectedDuration = roundUpToNearestMinute(duration)
+        guard pickerMode == .duration, let selectedDuration else { return }
+        let days = selectedDuration / Constants.secsInDay
+        let remainderAfterDays = selectedDuration % Constants.secsInDay
         let hours = remainderAfterDays / Constants.secsInHour
         let remainderAfterHours = remainderAfterDays % Constants.secsInHour
         let minutes = remainderAfterHours / Constants.secsInMinute
