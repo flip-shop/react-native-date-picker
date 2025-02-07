@@ -1,20 +1,11 @@
 package com.henninghall.date_picker.wheels.duration;
 
-import android.graphics.Paint;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.henninghall.date_picker.Label;
 import com.henninghall.date_picker.State;
-import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.pickers.Picker;
-import com.henninghall.date_picker.wheels.Wheel;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Need an extra wheel for duration as a day/date wheel doesn't support 0 value and also has only 31 days limit.
@@ -49,9 +40,9 @@ public class DaysDurationWheel extends DurationWheel {
     @Nullable
     @Override
     Integer getInitialValue() {
-        String durationProp = state.getDuration();
+        Integer durationProp = state.getDuration();
         if (durationProp != null) {
-            return secondsToDays(Integer.parseInt(durationProp));
+            return secondsToDays(durationProp);
         }
         return null;
     }

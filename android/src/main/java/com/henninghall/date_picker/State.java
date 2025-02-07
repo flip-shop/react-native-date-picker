@@ -5,12 +5,12 @@ import androidx.annotation.Nullable;
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Is24HourSource;
 import com.henninghall.date_picker.models.Mode;
+import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.DividerColorProp;
 import com.henninghall.date_picker.props.DurationProp;
 import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.IdProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
-import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
 import com.henninghall.date_picker.props.MaximumDurationProp;
@@ -139,8 +139,9 @@ public class State {
         return (String) dateProp.getValue();
     }
 
-    public String getDuration() {
-        return durationProp.getValue();
+    public Integer getDuration() {
+        Integer duration = durationProp.getValue();
+        return (duration != null) ? Math.max(0, duration) : null; // ignore negative values
     }
 
     private Calendar getDate() {
