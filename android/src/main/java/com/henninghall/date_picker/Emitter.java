@@ -49,7 +49,7 @@ public class Emitter {
 
     public static void onDurationChange(int durationS, String id, View view) {
         WritableMap event = Arguments.createMap();
-        event.putString("timestamp", durationS + "");
+        event.putInt("timestamp", durationS);
         event.putString("id", id);
         if(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED){
             deviceEventEmitter().emit("dateChange", event);
