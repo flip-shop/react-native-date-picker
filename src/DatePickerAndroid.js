@@ -73,6 +73,7 @@ export const DatePickerAndroid = React.memo((props) => {
     maximumDate: toIsoWithTimeZoneOffset(props.maximumDate),
     minimumDuration: props.minimumDuration || 60,
     maximumDuration: props.maximumDuration ? props.maximumDuration : undefined,
+    duration: props.duration ? props.duration : undefined,
     timezoneOffsetInMinutes: getTimezoneOffsetInMinutes(props),
     style: getStyle(props),
     onChange,
