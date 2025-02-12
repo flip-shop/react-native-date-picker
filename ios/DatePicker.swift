@@ -186,7 +186,7 @@ import UIKit
 
     public func setFontOptions(_ options: RNFontOptions) {
         pickerFont = UIFont(name: options.name, size: options.size)
-        pickerTextColor = UIColor(hex: options.color)
+        pickerTextColor = UIColor(hexString: options.color)
         reloadAllComponents()
         updateUnitLabelsFont()
     }
