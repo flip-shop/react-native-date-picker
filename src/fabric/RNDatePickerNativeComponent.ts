@@ -14,6 +14,12 @@ type StringEvent = {
   state: string
 }
 
+type FontOptions = {
+  fontName: string
+  fontSize: number
+  fontColor: string
+}
+
 export interface NativeProps extends ViewProps {
   locale?: string
   date?: Double
@@ -26,6 +32,7 @@ export interface NativeProps extends ViewProps {
   duration?: Int32
   onChange: BubblingEventHandler<DateEvent>
   onStateChange: BubblingEventHandler<StringEvent>
+  font?: FontOptions
 
   // Type has to be string to allow null/undefined as value.
   // For timezoneOffset, undefined and 0 means different things. 0 means GMT and undefined means device timezone.

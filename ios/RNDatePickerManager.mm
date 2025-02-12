@@ -6,6 +6,7 @@
 #import "RCTConvert.h"
 #import "react_native_date_picker-Swift.h"
 #import "RNDatePicker.h"
+#import "RNFontOptions.h"
 
 @implementation RNDatePickerManager
 
@@ -35,6 +36,7 @@ RCT_EXPORT_VIEW_PROPERTY(onStateChange, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(minimumDuration, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(maximumDuration, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(duration, NSInteger)
+RCT_EXPORT_VIEW_PROPERTY(font, RNFontOptions)
 RCT_REMAP_VIEW_PROPERTY(mode, datePickerMode, NSString)
 
 RCT_CUSTOM_VIEW_PROPERTY(timeZoneOffsetInMinutes, NSString, DatePicker)

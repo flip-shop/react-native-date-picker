@@ -1,9 +1,10 @@
 #import "RNDatePicker.h"
 #import "react_native_date_picker-Swift.h"
 #import <Foundation/Foundation.h>
+#import "RCTConvert.h"
+#import "RNFontOptions.h"
 
 #ifdef RCT_NEW_ARCH_ENABLED
-#import "RCTConvert.h"
 #import <React/RCTConversions.h>
 #import <react/renderer/components/RNDatePickerSpecs/ComponentDescriptors.h>
 #import <react/renderer/components/RNDatePickerSpecs/EventEmitters.h>
@@ -255,3 +256,16 @@ Class<RCTComponentViewProtocol> RNDatePickerCls(void)
 
 
 @end
+
+@implementation RCTConvert (RNDatePicker)
+
++ (RNFontOptions *)RNFontOptions:(id)json
+{
+    RNFontOptions *options = [[RNFontOptions alloc] init];
+
+    options.name = [self NSString:json[@"name"]];
+    options.color = [self NSString:json[@"color"]];
+    options.size = [self CGFloat:json[@"size"]];
+
+    return options;
+}

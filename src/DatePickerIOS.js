@@ -46,6 +46,7 @@ export const DatePickerIOS = (props) => {
     maximumDuration: props.maximumDuration ? props.maximumDuration : undefined,
     duration: props.duration ? props.duration : undefined,
     theme: props.theme ? props.theme : 'auto',
+    font: props.font ? props.font : 'undefined',
   }
 
   useModal({ props: modifiedProps, id: undefined })

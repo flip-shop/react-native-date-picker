@@ -26,6 +26,7 @@
 		39C7EDDE2D4D114200E4D4C7 /* DatePicker+unitLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDDD2D4D114200E4D4C7 /* DatePicker+unitLabels.swift */; };
 		39C7EDE02D4D114F00E4D4C7 /* DatePickerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDDF2D4D114F00E4D4C7 /* DatePickerMode.swift */; };
 		39F5BD542C2AC3A100E12407 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5BD532C2AC3A100E12407 /* DataSource.swift */; };
+		39FAC4412D5CCFA6008462F5 /* RNFontOptions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 39FAC4402D5CCFA6008462F5 /* RNFontOptions.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +65,8 @@
 		39C7EDDD2D4D114200E4D4C7 /* DatePicker+unitLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatePicker+unitLabels.swift"; sourceTree = "<group>"; };
 		39C7EDDF2D4D114F00E4D4C7 /* DatePickerMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerMode.swift; sourceTree = "<group>"; };
 		39F5BD532C2AC3A100E12407 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		39FAC43F2D5CCF89008462F5 /* RNFontOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNFontOptions.h; path = Utils/RNFontOptions.h; sourceTree = "<group>"; };
+		39FAC4402D5CCFA6008462F5 /* RNFontOptions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = RNFontOptions.mm; path = Utils/RNFontOptions.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 				3927AA392C17258C00671DAD /* RNDatePicker.mm */,
 				3927AA3F2C17258C00671DAD /* RNDatePickerManager.h */,
 				3927AA3D2C17258C00671DAD /* RNDatePickerManager.mm */,
+				39FAC43F2D5CCF89008462F5 /* RNFontOptions.h */,
+				39FAC4402D5CCFA6008462F5 /* RNFontOptions.mm */,
 				3927AA2D2C17255900671DAD /* Products */,
 				3927AA362C17258B00671DAD /* FlipDatePicker-Bridging-Header.h */,
 			);
@@ -208,6 +213,7 @@
 				39C7EDE02D4D114F00E4D4C7 /* DatePickerMode.swift in Sources */,
 				3927AA442C17258C00671DAD /* DatePicker+UIPickerViewDataSource.swift in Sources */,
 				3927AA462C17258C00671DAD /* DatePicker.swift in Sources */,
+				39FAC4412D5CCFA6008462F5 /* RNFontOptions.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
