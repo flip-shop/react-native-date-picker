@@ -14,8 +14,7 @@ extension DatePicker {
     func makeUnitLabel() -> UILabel {
         let label = UILabel()
         label.textAlignment = .right
-        label.font = Constants.labelUnitFont
-        label.isOpaque = false
+        label.font = pickerFont ?? Constants.labelUnitFont
         return label
     }
 
@@ -60,6 +59,8 @@ extension DatePicker {
                 item.textColor = textColor
             }
         }
+        setUnitLabelsText()
+        positionUnitLabels()
     }
 
     private func showUnitLabels() {
