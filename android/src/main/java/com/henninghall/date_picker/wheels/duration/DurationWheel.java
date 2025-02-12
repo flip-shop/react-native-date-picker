@@ -1,7 +1,6 @@
 package com.henninghall.date_picker.wheels.duration;
 
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -14,8 +13,6 @@ import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.wheels.Wheel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -36,7 +33,7 @@ public abstract class DurationWheel extends Wheel {
     private boolean initialized = false;
 
     public DurationWheel(@NonNull Picker picker,@NonNull Label label, State state) {
-        super(picker, state);
+        super(picker, state, 5);
         this.label = label;
         setDividerVisibility(false);
     }

@@ -47,6 +47,7 @@ public class PickerView extends RelativeLayout {
 
         if (didUpdate(ModeProp.name, Is24hourSourceProp.name)) {
             uiManager.updateWheelVisibility();
+            uiManager.updateBackgroundVisibility();
         }
 
         if (didUpdate(ModeProp.name, LocaleProp.name, Is24hourSourceProp.name)) {

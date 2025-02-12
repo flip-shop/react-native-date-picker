@@ -1,21 +1,13 @@
 package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
-
-import com.henninghall.date_picker.Label;
-import com.henninghall.date_picker.models.Mode;
-import com.henninghall.date_picker.models.WheelType;
-import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.State;
+import com.henninghall.date_picker.pickers.Picker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -39,12 +31,17 @@ public abstract class Wheel {
     public Picker picker;
     public SimpleDateFormat format;
 
-    public Wheel(Picker picker, State state) {
+    public Wheel(Picker picker, State state, int wheelItemCount) {
         this.state = state;
         this.picker = picker;
         this.format = new SimpleDateFormat(getFormatPattern(), state.getLocale());
         picker.setTextAlign(getTextAlign());
         picker.setWrapSelectorWheel(wrapSelectorWheel());
+        updateSelectorWheelItemCount(wheelItemCount);
+    }
+
+    public Wheel(Picker picker, State state) {
+        this(picker, state, 3);
     }
 
     private int getIndexOfDate(Calendar date){
@@ -138,5 +135,9 @@ public abstract class Wheel {
 
     public void setDividerVisibility(boolean visible) {
         picker.setDividerVisibility(visible);
+    }
+
+    public void updateSelectorWheelItemCount(int count) {
+        picker.updateSelectorWheelItemCount(count);
     }
 }

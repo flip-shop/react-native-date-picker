@@ -2,7 +2,9 @@ package com.henninghall.date_picker.ui;
 
 import android.view.View;
 
+import com.henninghall.date_picker.R;
 import com.henninghall.date_picker.State;
+import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.wheelFunctions.AddOnChangeListener;
 import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
 import com.henninghall.date_picker.wheelFunctions.Refresh;
@@ -19,6 +21,7 @@ import java.util.Calendar;
 public class UIManager {
     private final State state;
     private final View rootView;
+    private final View backgroundView;
     private Wheels wheels;
     private WheelScroller wheelScroller = new WheelScroller();
     private WheelChangeListenerImpl onWheelChangeListener;
@@ -26,6 +29,7 @@ public class UIManager {
     public UIManager(State state, View rootView){
         this.state = state;
         this.rootView = rootView;
+        backgroundView = rootView.findViewById(R.id.pickerBackground);
         wheels = new Wheels(state, rootView);
         addOnChangeListener();
     }
@@ -91,5 +95,10 @@ public class UIManager {
 
     public void setDividerColor(String color) {
         wheels.applyOnAll(new SetDividerColor(color));
+    }
+
+    public void updateBackgroundVisibility() {
+        int visibility = state.getMode() == Mode.duration ? View.VISIBLE : View.GONE;
+        backgroundView.setVisibility(visibility);
     }
 }
