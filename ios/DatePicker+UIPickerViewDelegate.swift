@@ -40,8 +40,11 @@ extension DatePicker: UIPickerViewDelegate {
             let rowSize = pickerView.rowSize(forComponent: component)
             label.frame = CGRect(x: 0, y: 0, width: rowSize.width, height: rowSize.height)
             label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 20)
+            label.font = pickerFont ?? UIFont.systemFont(ofSize: 20)
             label.backgroundColor = .clear
+            if let pickerTextColor {
+                label.textColor = pickerTextColor
+            }
         }
         label.text = dataManager.getValueInComponentForRow(component: component, row: row)
 

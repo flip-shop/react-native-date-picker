@@ -252,6 +252,11 @@ Class<RCTComponentViewProtocol> RNDatePickerCls(void)
   [_picker setDuration:duration];
 }
 
+- (void)setFontOptions:(RNFontOptions*)fontOptions
+{
+  [_picker setFontOptions:fontOptions];
+}
+
 #endif
 
 

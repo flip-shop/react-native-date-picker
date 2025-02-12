@@ -53,6 +53,15 @@ extension DatePicker {
         }
     }
 
+    func updateUnitLabelsFont() {
+        for item in [hourUnitLabel, dayUnitLabel, minuteUnitLabel] {
+            item.font = pickerFont ?? Constants.labelUnitFont
+            if let textColor = pickerTextColor {
+                item.textColor = textColor
+            }
+        }
+    }
+
     private func showUnitLabels() {
         addSubview(dayUnitLabel)
         addSubview(hourUnitLabel)
