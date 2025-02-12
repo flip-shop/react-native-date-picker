@@ -15,9 +15,9 @@ type StringEvent = {
 }
 
 type FontOptions = {
-  fontName: string
-  fontSize: Double
-  fontColor: string
+  name: string
+  size: Double
+  color: string
 }
 
 export interface NativeProps extends ViewProps {

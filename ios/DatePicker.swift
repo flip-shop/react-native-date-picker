@@ -182,6 +182,8 @@ import UIKit
         selectedDate = date
     }
 
+    public func setFontOptions(_ options: RNFontOptions) {}
+
     func is24HourFormat() -> Bool {
         let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: locale) ?? ""
         return dateFormat.contains("H") || dateFormat.contains("k")

@@ -134,6 +134,9 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         
         int duration = [RCTConvert int:[props objectForKey:@"duration"]];
         if(duration) [picker setDuration:duration];
+        
+        RNFontOptions* fontOptions = [RCTConvert RNFontOptions:[props objectForKey:@"font"]];
+        if(fontOptions) [picker setFontOptions:fontOptions];
 
         NSString * timeZoneProp = [props valueForKey:@"timeZoneOffsetInMinutes"];
         if(timeZoneProp) [picker setTimeZoneOffsetInMinutes:timeZoneProp];

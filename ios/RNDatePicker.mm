@@ -261,11 +261,13 @@ Class<RCTComponentViewProtocol> RNDatePickerCls(void)
 
 + (RNFontOptions *)RNFontOptions:(id)json
 {
-    RNFontOptions *options = [[RNFontOptions alloc] init];
-
-    options.name = [self NSString:json[@"name"]];
-    options.color = [self NSString:json[@"color"]];
-    options.size = [self CGFloat:json[@"size"]];
-
-    return options;
+  RNFontOptions *options = [[RNFontOptions alloc] init];
+  
+  options.name = [self NSString:json[@"name"]];
+  options.color = [self NSString:json[@"color"]];
+  options.size = [self CGFloat:json[@"size"]];
+  
+  return options;
 }
+
+@end
