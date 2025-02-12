@@ -16,7 +16,7 @@ type StringEvent = {
 
 type FontOptions = {
   fontName: string
-  fontSize: number
+  fontSize: Double
   fontColor: string
 }
 
