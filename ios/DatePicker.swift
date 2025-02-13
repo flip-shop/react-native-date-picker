@@ -99,7 +99,6 @@ import UIKit
         } else if hexColor?.lowercased() == Constants.darkColor {
             overrideUserInterfaceStyle = .dark
         }
-        overrideUserInterfaceStyle = .light
     }
 
     public func setDatePickerMode(_ mode: String?) {
