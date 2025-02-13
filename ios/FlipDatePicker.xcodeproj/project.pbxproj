@@ -17,6 +17,7 @@
 		3927AA562C17329200671DAD /* ComponentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA552C17329200671DAD /* ComponentDataSource.swift */; };
 		3927AA582C1732ED00671DAD /* ComponentInfinityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA572C1732ED00671DAD /* ComponentInfinityDataSource.swift */; };
 		3927AA5A2C17335200671DAD /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927AA592C17335200671DAD /* DataManager.swift */; };
+		3939B9F42D5CEFEB0016F802 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3939B9F32D5CEFE40016F802 /* UIColor+hex.swift */; };
 		39975E572C17B81600B23594 /* DatePicker+DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39975E562C17B81600B23594 /* DatePicker+DataManager.swift */; };
 		39C7EDD82D4D113100E4D4C7 /* CGSize+infinitySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDD42D4D113100E4D4C7 /* CGSize+infinitySize.swift */; };
 		39C7EDD92D4D113100E4D4C7 /* String+boundingRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDD62D4D113100E4D4C7 /* String+boundingRect.swift */; };
@@ -26,6 +27,7 @@
 		39C7EDDE2D4D114200E4D4C7 /* DatePicker+unitLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDDD2D4D114200E4D4C7 /* DatePicker+unitLabels.swift */; };
 		39C7EDE02D4D114F00E4D4C7 /* DatePickerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C7EDDF2D4D114F00E4D4C7 /* DatePickerMode.swift */; };
 		39F5BD542C2AC3A100E12407 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5BD532C2AC3A100E12407 /* DataSource.swift */; };
+		39FAC4412D5CCFA6008462F5 /* RNFontOptions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 39FAC4402D5CCFA6008462F5 /* RNFontOptions.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +57,7 @@
 		3927AA552C17329200671DAD /* ComponentDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDataSource.swift; sourceTree = "<group>"; };
 		3927AA572C1732ED00671DAD /* ComponentInfinityDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentInfinityDataSource.swift; sourceTree = "<group>"; };
 		3927AA592C17335200671DAD /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		3939B9F32D5CEFE40016F802 /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		39975E562C17B81600B23594 /* DatePicker+DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatePicker+DataManager.swift"; sourceTree = "<group>"; };
 		39C7EDD32D4D113100E4D4C7 /* CGFloat+roundToNearestPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+roundToNearestPixel.swift"; sourceTree = "<group>"; };
 		39C7EDD42D4D113100E4D4C7 /* CGSize+infinitySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+infinitySize.swift"; sourceTree = "<group>"; };
@@ -64,6 +67,8 @@
 		39C7EDDD2D4D114200E4D4C7 /* DatePicker+unitLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatePicker+unitLabels.swift"; sourceTree = "<group>"; };
 		39C7EDDF2D4D114F00E4D4C7 /* DatePickerMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerMode.swift; sourceTree = "<group>"; };
 		39F5BD532C2AC3A100E12407 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		39FAC43F2D5CCF89008462F5 /* RNFontOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNFontOptions.h; path = Utils/RNFontOptions.h; sourceTree = "<group>"; };
+		39FAC4402D5CCFA6008462F5 /* RNFontOptions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = RNFontOptions.mm; path = Utils/RNFontOptions.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +98,8 @@
 				3927AA392C17258C00671DAD /* RNDatePicker.mm */,
 				3927AA3F2C17258C00671DAD /* RNDatePickerManager.h */,
 				3927AA3D2C17258C00671DAD /* RNDatePickerManager.mm */,
+				39FAC43F2D5CCF89008462F5 /* RNFontOptions.h */,
+				39FAC4402D5CCFA6008462F5 /* RNFontOptions.mm */,
 				3927AA2D2C17255900671DAD /* Products */,
 				3927AA362C17258B00671DAD /* FlipDatePicker-Bridging-Header.h */,
 			);
@@ -119,6 +126,7 @@
 		3927AA492C17261000671DAD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3939B9F32D5CEFE40016F802 /* UIColor+hex.swift */,
 				39C7EDD32D4D113100E4D4C7 /* CGFloat+roundToNearestPixel.swift */,
 				39C7EDD42D4D113100E4D4C7 /* CGSize+infinitySize.swift */,
 				39C7EDD52D4D113100E4D4C7 /* Constants.swift */,
@@ -189,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3939B9F42D5CEFEB0016F802 /* UIColor+hex.swift in Sources */,
 				3927AA5A2C17335200671DAD /* DataManager.swift in Sources */,
 				3927AA4B2C17264600671DAD /* Array+subscript.swift in Sources */,
 				39C7EDDE2D4D114200E4D4C7 /* DatePicker+unitLabels.swift in Sources */,
@@ -208,6 +217,7 @@
 				39C7EDE02D4D114F00E4D4C7 /* DatePickerMode.swift in Sources */,
 				3927AA442C17258C00671DAD /* DatePicker+UIPickerViewDataSource.swift in Sources */,
 				3927AA462C17258C00671DAD /* DatePicker.swift in Sources */,
+				39FAC4412D5CCFA6008462F5 /* RNFontOptions.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

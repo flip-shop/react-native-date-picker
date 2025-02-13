@@ -41,6 +41,8 @@ import UIKit
     private(set) var minDuration: Int?
     private(set) var maxDuration: Int?
     private(set) var calendar: Calendar = .init(identifier: .gregorian)
+    private(set) var pickerFont: UIFont?
+    private(set) var pickerTextColor: UIColor?
     private(set) lazy var dayUnitLabel = makeUnitLabel()
     private(set) lazy var hourUnitLabel = makeUnitLabel()
     private(set) lazy var minuteUnitLabel = makeUnitLabel()
@@ -180,6 +182,14 @@ import UIKit
         }
 
         selectedDate = date
+    }
+
+    public func setFontOptions(_ options: RNFontOptions) {
+        pickerFont = UIFont(name: options.name, size: options.size)
+        pickerTextColor = UIColor(hexString: options.color)
+        reloadAllComponents()
+        guard pickerMode == .duration else { return }
+        updateUnitLabelsFont()
     }
 
     func is24HourFormat() -> Bool {

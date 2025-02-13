@@ -1,5 +1,7 @@
-#ifdef RCT_NEW_ARCH_ENABLED
+#import "RCTConvert.h"
+#import "RNFontOptions.h"
 
+#ifdef RCT_NEW_ARCH_ENABLED
 #import <React/RCTViewComponentView.h>
 #import <UIKit/UIKit.h>
  
@@ -22,3 +24,8 @@ NS_ASSUME_NONNULL_END
 
 #endif
 
+@interface RCTConvert (RNDatePicker)
+
++ (RNFontOptions*)RNFontOptions:(id)json;
+
+@end
