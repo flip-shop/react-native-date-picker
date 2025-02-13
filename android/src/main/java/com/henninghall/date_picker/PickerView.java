@@ -9,6 +9,7 @@ import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.DividerColorProp;
 import com.henninghall.date_picker.props.DurationProp;
+import com.henninghall.date_picker.props.FontOptionsProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
@@ -41,8 +42,8 @@ public class PickerView extends RelativeLayout {
 
     public void update() {
 
-        if (didUpdate(TextColorProp.name)) {
-            uiManager.updateTextColor();
+        if (didUpdate(TextColorProp.name, FontOptionsProp.name)) {
+            uiManager.updateFontsAndTextColors();
         }
 
         if (didUpdate(ModeProp.name, Is24hourSourceProp.name)) {

@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.icu.text.DecimalFormatSymbols;
 import android.os.Build;
@@ -62,6 +63,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.FloatRange;
 import androidx.annotation.IntDef;
 import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 import androidx.annotation.Px;
 
 import com.henninghall.date_picker.R;
@@ -1695,6 +1697,19 @@ public class NumberPicker extends LinearLayout {
             mAccessibilityNodeProvider = new AccessibilityNodeProviderImpl();
         }
         return mAccessibilityNodeProvider;
+    }
+
+    public void setTextStyle(@NonNull Typeface font, @FloatRange(from = 0.0, fromInclusive = false) Float fontSize, @ColorInt int color) {
+        mSelectorWheelPaint.setTypeface(font);
+        mInputText.setTypeface(font);
+
+        mSelectorWheelPaint.setTextSize(fontSize);
+        mInputText.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
+
+        mSelectorWheelPaint.setColor(color);
+        mInputText.setTextColor(color);
+
+        invalidate();
     }
 
     /**

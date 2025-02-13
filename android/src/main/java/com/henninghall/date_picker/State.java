@@ -3,11 +3,13 @@ package com.henninghall.date_picker;
 import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Dynamic;
+import com.henninghall.date_picker.models.FontOptions;
 import com.henninghall.date_picker.models.Is24HourSource;
 import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.DividerColorProp;
 import com.henninghall.date_picker.props.DurationProp;
+import com.henninghall.date_picker.props.FontOptionsProp;
 import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.IdProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
@@ -49,7 +51,7 @@ public class State {
     private final DividerColorProp dividerColorProp = new DividerColorProp();
     private final MinimumDurationProp minimumDurationProp = new MinimumDurationProp();
     private final MaximumDurationProp maximumDurationProp = new MaximumDurationProp();
-
+    private final FontOptionsProp fontOptionsProp = new FontOptionsProp();
     private final HashMap props = new HashMap<String, Prop>() {{
         put(DateProp.name, dateProp);
         put(DurationProp.name, durationProp);
@@ -66,6 +68,7 @@ public class State {
         put(DividerColorProp.name, dividerColorProp);
         put(MinimumDurationProp.name, minimumDurationProp);
         put(MaximumDurationProp.name, maximumDurationProp);
+        put(FontOptionsProp.name, fontOptionsProp);
     }};
     public DerivedData derived;
 
@@ -201,9 +204,12 @@ public class State {
         Integer min = minimumDurationProp.getValue();
         return (min != null) ? Math.max(0, min) : null; // ignore negative values
     }
-
     public Integer getMaximumDurationS() {
         Integer max = maximumDurationProp.getValue();
         return (max != null) ? Math.max(0, max) : null; // ignore negative values
+    }
+
+    public FontOptions getFontOptions() {
+        return fontOptionsProp.getValue();
     }
 }
