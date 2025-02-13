@@ -1,7 +1,12 @@
 package com.henninghall.date_picker.pickers;
 
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.view.View;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.FloatRange;
+import androidx.annotation.NonNull;
 
 public interface Picker {
     void setTextAlign(Paint.Align align);
@@ -16,6 +21,7 @@ public interface Picker {
     int getValue();
     void setValue(int value);
     void setTextColor(String value);
+    void setTextStyle(@NonNull Typeface fontName, @FloatRange(from = 0.0, fromInclusive = false) Float fontSize, @ColorInt int color);
     void setOnValueChangeListenerInScrolling(Picker.OnValueChangeListenerInScrolling listener);
     void setOnValueChangedListener(Picker.OnValueChangeListener onValueChangeListener);
     View getView();

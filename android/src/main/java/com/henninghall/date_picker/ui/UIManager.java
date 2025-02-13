@@ -1,12 +1,20 @@
 package com.henninghall.date_picker.ui;
 
+import static com.henninghall.date_picker.ui.FontStyleDefaults.getFontColorOrDefault;
+import static com.henninghall.date_picker.ui.FontStyleDefaults.getFontOrDefault;
+import static com.henninghall.date_picker.ui.FontStyleDefaults.getFontSizeSpOrDefault;
+
+import android.content.Context;
+import android.graphics.Typeface;
 import android.view.View;
 
 import com.henninghall.date_picker.R;
 import com.henninghall.date_picker.State;
+import com.henninghall.date_picker.models.FontOptions;
 import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.wheelFunctions.AddOnChangeListener;
 import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
+import com.henninghall.date_picker.wheelFunctions.FontAndTextColor;
 import com.henninghall.date_picker.wheelFunctions.Refresh;
 import com.henninghall.date_picker.wheelFunctions.SetDate;
 import com.henninghall.date_picker.wheelFunctions.SetDividerColor;
@@ -38,8 +46,17 @@ public class UIManager {
         wheels.applyOnAll(new UpdateVisibility());
     }
 
-    public void updateTextColor(){
-        wheels.applyOnAll(new TextColor(state.getTextColor()));
+    public void updateFontsAndTextColors() {
+        if (state.getFontOptions() != null) { // if fontOptions prop available, update font,size and color at once -> ignore textColor standalone prop
+            FontOptions options = state.getFontOptions();
+            Context context = rootView.getContext();
+            Typeface fontType = getFontOrDefault(options.getFontName(), context);
+            float fontSize = getFontSizeSpOrDefault(options.getFontSize(), context);
+            int fontColor = getFontColorOrDefault(options.getFontColor(), context);
+            wheels.applyOnAll(new FontAndTextColor(fontType, fontSize, fontColor));
+        } else if (state.getTextColor() != null) { // if fontOptions prop not available, update only textColor prop
+            wheels.applyOnAll(new TextColor(state.getTextColor()));
+        }
     }
 
     public void updateWheelOrder() {

@@ -74,6 +74,7 @@ export const DatePickerAndroid = React.memo((props) => {
     minimumDuration: props.minimumDuration || 60,
     maximumDuration: props.maximumDuration ? props.maximumDuration : undefined,
     duration: props.duration ? props.duration : undefined,
+    fontOptions: props.fontOptions ? props.fontOptions : undefined,
     timezoneOffsetInMinutes: getTimezoneOffsetInMinutes(props),
     style: getStyle(props),
     onChange,
