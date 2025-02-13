@@ -27,7 +27,6 @@ enum Constants {
 
     // MARK: unit labels
 
-    static let unitLabelVerticalPositionAdjustment: CGFloat = UIScreen.main.scale == 2 ? 2 : 1
     static let unitLabelSpacing: CGFloat = 50
     static let unitLabelBaselineOffset: CGFloat = 1
     static let unitDayText = "d"

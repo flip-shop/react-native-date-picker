@@ -99,6 +99,7 @@ import UIKit
         } else if hexColor?.lowercased() == Constants.darkColor {
             overrideUserInterfaceStyle = .dark
         }
+        overrideUserInterfaceStyle = .light
     }
 
     public func setDatePickerMode(_ mode: String?) {
@@ -188,6 +189,7 @@ import UIKit
         pickerFont = UIFont(name: options.name, size: options.size)
         pickerTextColor = UIColor(hexString: options.color)
         reloadAllComponents()
+        guard pickerMode == .duration else { return }
         updateUnitLabelsFont()
     }
 

@@ -38,17 +38,17 @@ extension DatePicker {
             guard let self else { return }
 
             dayUnitLabel.frame.origin.x = unitLabelOriginX(forComponent: dataManager.componentIndex(component: .day))
-            dayUnitLabel.center.y = center.y + Constants.unitLabelVerticalPositionAdjustment
-            dayUnitLabel.frame.origin.y.roundToNearestPixel()
+            dayUnitLabel.center.y = center.y
+            dayUnitLabel.frame.origin.y.roundToNearestPixel(roundingRule: .up)
 
             hourUnitLabel.frame.origin.x = unitLabelOriginX(forComponent: dataManager.componentIndex(component: .hour))
-            hourUnitLabel.center.y = center.y + Constants.unitLabelVerticalPositionAdjustment
-            hourUnitLabel.frame.origin.y.roundToNearestPixel()
+            hourUnitLabel.center.y = center.y
+            hourUnitLabel.frame.origin.y.roundToNearestPixel(roundingRule: .up)
 
             minuteUnitLabel.frame.origin
                 .x = unitLabelOriginX(forComponent: dataManager.componentIndex(component: .minute))
-            minuteUnitLabel.center.y = center.y + Constants.unitLabelVerticalPositionAdjustment
-            minuteUnitLabel.frame.origin.y.roundToNearestPixel()
+            minuteUnitLabel.center.y = center.y
+            minuteUnitLabel.frame.origin.y.roundToNearestPixel(roundingRule: .up)
         }
     }
 
@@ -58,6 +58,7 @@ extension DatePicker {
             if let textColor = pickerTextColor {
                 item.textColor = textColor
             }
+            item.alpha = 0.85
         }
         setUnitLabelsText()
         positionUnitLabels()
