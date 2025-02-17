@@ -63,4 +63,12 @@ const themeCheck = new PropCheck(
   "Invalid theme. Valid options: 'light', 'dark', 'auto'"
 )
 
-const checks = [dateCheck, widthCheck, heightCheck, modeCheck, themeCheck]
+const fontOptionsCheck = new PropCheck(
+  (props) =>
+    props && 
+    props.fontOptions && 
+    typeof props.fontOptions !== 'object',
+  'Invalid fontOptions. Must be an object containing font styling options.'
+)
+
+const checks = [dateCheck, widthCheck, heightCheck, modeCheck, themeCheck, fontOptionsCheck]
