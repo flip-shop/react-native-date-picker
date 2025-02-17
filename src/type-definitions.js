@@ -23,7 +23,11 @@
  * theme?: string | undefined,
  * onConfirm?:PlatformPickerProps['onConfirm'],
  * onCancel?:PlatformPickerProps['onCancel'],
- * fontOptions?: import('react-native').StyleProp<import('react-native').TextStyle>,
+ * fontOptions?: {
+ * name?: string,
+ * size?: number,
+ * color?: string
+ * }
  * }} NativeProps
  *
  * @typedef {NativeProps & {
