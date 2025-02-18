@@ -23,6 +23,11 @@
  * theme?: string | undefined,
  * onConfirm?:PlatformPickerProps['onConfirm'],
  * onCancel?:PlatformPickerProps['onCancel'],
+ * fontOptions?: {
+ * name?: string,
+ * size?: number,
+ * color?: string
+ * }
  * }} NativeProps
  *
  * @typedef {NativeProps & {
